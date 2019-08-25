@@ -1,0 +1,9 @@
+#!/usr/bin/php
+<?
+include('../../mini.inc.php');
+include('./ultimatums.class.php');
+$um=new ultimatums();
+if($um->deconne()) echo "Erreur ouverture : ".$um->getErrCombo();
+echo json_encode($um->getlist(),JSON_PRETTY_PRINT);
+echo "\n";
+?>

@@ -1,0 +1,11 @@
+{
+"magic": "oui!",
+"defaultLanguage": "fr",
+"supportedLanguages": ["fr"],
+"years": {
+	"2018": "2018-2019",
+	"2019": "2019-2020",
+	"NA" : "~na~"	
+	},
+"cury": "2019"
+}

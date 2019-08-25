@@ -1,0 +1,11 @@
+#!/usr/bin/php
+<?
+include('../../mini.inc.php');
+include('./ultimatums.class.php');
+echo "Reset de la base des ultimatums\n";
+$um=new ultimatums();
+if($um->deconne()) echo "Erreur ouverture : ".$um->getErrCombo();
+$um->resetdb();
+echo $um->getErrCombo();
+echo "\n";
+?>
