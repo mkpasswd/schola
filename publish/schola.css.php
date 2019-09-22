@@ -8,6 +8,24 @@ DIV.BIGINFO H1 {
 	text-align: center;
 	}
 
+#HEAD H1 {
+	vertical-align: top;
+	display: inline-block;
+	/* min-width: 50%; */
+	}
+
+
+#HEAD IMG {
+	padding-top: 5px;
+	margin-left: 20px;
+	}
+
+/* bandeau bas */
+
+#SCHOLALOGO {
+	height: 32px
+	}
+
 LABEL.OBLIG:before {
 	content: "\2663";
 	color: tomato;
@@ -43,22 +61,6 @@ SPAN.period { font-weight: bold ;
 	}
 
 #TAILER { min-height: 35px;}
-
-#HEAD {
-	/* padding: 5px 5px 5px 5px; */
-	/* height: 110px */
-	}
-#HEAD IMG {
-/* 	height: 85px; */
-	margin-top: 0px;
-	margin-left: 5px;
-	margin-right: 20px;
-	margin-bottom: 5px;
-	float: left
-	}
-#HEAD H1 {
-	display: inline-block;
-	}
 
 #TAILER {
 	text-align:left;

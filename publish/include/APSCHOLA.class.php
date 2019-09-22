@@ -11,7 +11,11 @@ const ONE='ONE'; //un seul contexte de traduction pour cette appli
 private $conf=null;
 private $lang=null;
 private $trad=null;
- 
+var $recuser='';
+var $reccheck='';
+private $recadmin=false;
+var $db=null;
+
 const DEFLANG='fr';
 
 function site() {return self::SITE;}
@@ -36,7 +40,40 @@ function loadconf() {
 	$this->conf=new fastConf(self::ROOT.self::FASTCONF);
 	}
 
+
+public function gpaccess() {
+	$this->db=new scholaDB($this->conf->dbhost,$this->conf->dbuser,$this->conf->dbpass,$this->conf->dbname);
+	if($this->db->wtf()) return false;
+	$id=trim(T::gp('id'));
+	$adm=trim(T::gp('adm'));
+	$check=trim(T::gp('check'));
+	
+	//bypass check when recorded user is admin
+	// and no check parameter
+	if(!$check && $this->isAdmin()) return true;
+
+	$ckuser=($adm)? $adm:$id;
+	if(!$ckuser && $this->recuser) $ckuser=$this->recuser;
+	else $this->recuser=$ckuser;
+	if(!$check && $this->reccheck) $check=$this->reccheck;
+	else $this->reccheck=$check;
+	// echo "ckuser=$ckuser\ncheck=$check\n";
+	if(!($this->db->keyOK($ckuser,$check))) {
+		// echo $this->db->getErrCombo();
+		// var_dump($this->db->wtf());
+		// var_dump($this->db->errn);
+		$this->recuser='';
+		$this->reccheck='';
+		return false;
+		};
+	$this->recadmin=$this->db->isAdmin($ckuser);
+	return true;
+	}
+
+function isAdmin() {return $this->db->isAdmin($this->recuser);}
+
 function getTrad() {return $this->trad;}
+function getConf() {return $this->conf;}
 
 function fitLang() {
 	$reqlang=T::gp('lang');
@@ -57,16 +94,21 @@ function fitLang() {
 	};
 }
 
+
 // ===================== SORTIES HTML =======================
 function simpleSelect($name,$opt,$default=null,$extra='') {
 	$ret="<SELECT name=\"$name\" id=\"$name\" $extra>\n";
 	$ret.="<OPTION value=\"\">-</OPTION>\n";
-	foreach($opt as $v) {
-		$yes=($opt==$default)? 'SELECTED':'';
-		$ret.="<OPTION value=\"$v\" $yes>$v</OPTION>\n";
+	foreach($opt as $k=>$v) {
+		$yes=($k==$default)? 'SELECTED':'';
+		$ret.="<OPTION value=\"$k\" $yes>$v</OPTION>\n";
 		};
 	$ret.="</SELECT>\n";
 	return $ret;
+	}
+
+function yearselect() {
+	return $this->simpleSelect('year',$this->conf->years,null,'class="TX"');
 	}
 
 function optgroupSelect($name,$opt,$default=null, $extra='') {
@@ -102,7 +144,7 @@ $nojq=isset($extra['nojq']);
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 	<!-- <meta http-equiv="Cache-Control" content="private, cache, no-store, max-age=600"> -->
-	<link rel="shortcut icon" href="<?=$this->site();?>/images/aspros-64x64.png" /> <!--pour mod_proxy_html -->
+	<link rel="shortcut icon" href="<?=$this->site();?>/images/schola-favicon.png" /> <!--pour mod_proxy_html -->
 	<TITLE><?=$title;?></TITLE>
 	<meta name="description" content="<?$this->getTrad()->translate(self::ONE,'DEFTITLE')?>">
 	<meta name="viewport" content="width=device-width">
@@ -116,10 +158,12 @@ $nojq=isset($extra['nojq']);
 	<script src="<?=$this->site()?>/include/JT.js.php"></script>
 	<? }; ?>
 
-	<link rel="stylesheet" href="<?=self::BASEJQ?>/jqueryui/1.9.1/themes/smoothness/jquery-ui.css">	
+	<link rel="stylesheet" href="<?=self::BASEJQ?>/jqueryui/1.9.1/themes/sunny/jquery-ui.css">	
 	<link rel="stylesheet" href="<?=$this->site();?>/schola.css.php">
 
-<? if(!$nojq) { ?>
+<? if(!$nojq) {
+	Mess::insertHTML();
+?>
 <script>
 $(function() { 
 $(document).tooltip();
@@ -129,7 +173,11 @@ $(document).tooltip();
 
 <!--  ========================== content -->
 <HEADER id=HEAD class="ui-widget ui-widget-header ui-corner-all">
-<IMG src="<?echo $this->site();?>/images/schola.png"><H1><?echo $title?></H1>
+<IMG src="<?echo $this->site();?>/images/schola-logo-h100.png" class="G">
+<H1>
+<?echo $title?>
+</H1>
+<!-- <IMG src="<?echo $this->site();?>/images/schola-ogol-h100.png" class="D"> -->
 </HEADER>
 <DIV id="MAIN" class="ui-widget-content ui-corner-all">
 <?
@@ -144,7 +192,7 @@ function tailer($extra='') {
 ?>
 </DIV	> <!-- fin de MAIN-->
 <FOOTER id="TAILER" class="ui-widget ui-widget-header ui-corner-all">
-<IMG id="SCHOLALOGO" src="<?echo $this->site();?>/images/ASPROS.png" alt="Logo ASPROS"><SPAN id="FOOTERAPPNAME">ASPROS</SPAN>
+<IMG id="SCHOLALOGO" src="<?echo $this->site();?>/images/schola-favicon.png" alt="icone"><A href="https://scholacantorumdenantes.jimdo.com/">SITEINTERNET</A>
 </FOOTER>
 </BODY>
 </HTML>

@@ -10,20 +10,30 @@ CREATE TABLE IF NOT EXISTS adh (
 	givenName VARCHAR(128) default '',
 	mail VARCHAR(128) default '',
 	category VARCHAR(32) default '',
+	year VARCHAR(32) default '',
+	hasResigned BOOLEAN default false,
+	isActive BOOLEAN default true,
+	isCAMember BOOLEAN default false,
+	isBureauMember BOOLEAN default false,
+	showAddress BOOLEAN default false,
 	isAdmin BOOLEAN default false,
 	jsonVals JSON,
 	createTS TIMESTAMP default current_timestamp,
 	modifyTS TIMESTAMP default current_timestamp on update current_timestamp,
 	lastCallTS TIMESTAMP NULL,
 	lastUserModTS TIMESTAMP NULL,
+	lastUserAccessTS TIMESTAMP NULL,
 	PRIMARY KEY (id)
-	);
+	) DEFAULT CHARACTER SET utf8;
 ALTER TABLE adh auto_increment=1024;
 CREATE INDEX adhmail ON adh (mail);
-CREATE TRIGGER adhinsert
-BEFORE INSERT ON adh
-FOR EACH ROW
-    SET NEW.akey = ifnull(NEW.akey,md5(concat(rand(),rand())));
+## WARNING : using replace into create a new AKEY if not already set in the query
+## thus the trigger should match a change with an empty ID rather than an empty AKEY 
+## so I removed the stuff and dealed with that programatically in the replaceUser method
+## CREATE TRIGGER adhinsert
+## BEFORE INSERT ON adh
+## FOR EACH ROW
+##    SET NEW.akey = ifnull(NEW.akey,md5(concat(rand(),rand())));
 ##
 ## bootstrap root user creation
 ## to be deleted once a real admin user is set

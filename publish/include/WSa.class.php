@@ -25,7 +25,12 @@ function __construct () {
 function send($optjson=0) {
 	header("Content-type: text/plain");
 	header('Access-Control-Allow-Origin: *');
-	echo json_encode($this,$optjson);
+	$res=json_encode($this,$optjson);
+	if($res===false) $res=json_encode((object)array('yes'=>false,
+					'status'=>json_last_error(),
+					'message'=>'JSONENCODEERROR',
+					'answer'=>json_last_error_msg()));
+	echo $res;
 	}
 
 function sendXSOK($optjson=0) {

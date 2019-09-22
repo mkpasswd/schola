@@ -1,8 +1,19 @@
 <?
 define('__PURELOCAL','yo');
+// define('__BAGAGE','yo');
 define('APPNAME','SCHOLA');
 
 do {
+/*
+	if(defined('__BAGAGE')) {
+		define('ROOT',dirname(realpath(__FILE__)));
+		define('SITE','http://schola.le-bagage.net/schola');
+		error_reporting(E_ALL  ^ E_STRICT );
+		ini_set('display_errors', 'On');
+		ini_set('session.gc_maxlifetime',43200); // 12 heures
+		break;
+		};
+*/
 	if(defined('__PURELOCAL')) {
 		define('ROOT',dirname(realpath(__FILE__)));
 		define('SITE',$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME'].'/schola');
@@ -22,6 +33,6 @@ do {
 	} while(false);
 
 ini_set('include_path', ROOT.'/include');
-ini_set('error_log',ROOT.'/logs/aspros-error.log');
+ini_set('error_log',ROOT.'/logs/schola-error.log');
 
 ?>

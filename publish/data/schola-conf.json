@@ -7,5 +7,9 @@
 	"2019": "2019-2020",
 	"NA" : "~na~"	
 	},
-"cury": "2019"
+"cury": "2019",
+"dbhost": "localhost",
+"dbname": "schola",
+"dbuser": "schola",
+"dbpass": "tooeasytoguess"
 }

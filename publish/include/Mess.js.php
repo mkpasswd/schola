@@ -48,12 +48,6 @@ Mess.ready=function() {
 	}
 	
 $(function() {
-	$(document).ajaxSend(function() {
-		Mess.loading();
-		});
-	$(document).ajaxStop(function() {
-		Mess.ready();
-	});
 	$('#MECLOSE').click(function() {
 		Mess.clear(300);	
 	});

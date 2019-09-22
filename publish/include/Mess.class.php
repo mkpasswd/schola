@@ -1,8 +1,9 @@
 <?
 //
 class Mess {
-function output() {
+static function insertHTML() {
 ?>
+<!-- Mess.class.php -->
 <link rel="stylesheet" href="<?echo SITE;?>/mess.css.php">
 <DIV id="MESSAGE" class="ui-widget ui-widget-content ui-corner-all info" style="display:none">
 <DIV id="MEVALID"><SPAN id="MECLOSE" class="ui-icon ui-icon-circle-close"></SPAN></DIV>
@@ -10,6 +11,7 @@ function output() {
 </DIV>
 <DIV id="LOADING" class="loading" style="display:none"><IMG src="<?echo SITE;?>/images/loading.gif"></DIV>
 <script src="<?echo SITE;?>/include/Mess.js.php"></script>
+<!-- Mess.class.php -->
 <?
 } //fin de output
 }

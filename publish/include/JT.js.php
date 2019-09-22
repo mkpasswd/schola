@@ -1,10 +1,23 @@
 <?header('Content-type: text/javascript; charset=utf-8');
 include('../mini.inc.php');
+include('global.inc.php');
 ?>
 // <SCRIPT> balise bidon pour affiche syntaxe javascript
 
 var SITE='<?echo SITE;?>'; 
 var WSBASE='<?echo SITE;?>/WS'; 
+
+// Initialisation
+$(function() {
+	$.ajaxSetup({dataType:'json'});
+	$(document).ajaxError(function() {
+		// console.log('erreur ajax');
+		Mess.error("<?asi18n('ERRJSONDEFUNC');?>");
+		JT.mainDisable();
+		});
+	$(document).ajaxSend(function() { Mess.loading(); });
+	$(document).ajaxStop(function() { Mess.ready(); });
+});
 
 function JT() {};
 
@@ -21,6 +34,21 @@ JT.mainDisable=function() {
 	$('#MAIN *').addClass('disabled');
 	$('#MAIN').addClass('disabled');
 	};
+
+//===================================
+// AFFICHAGE DES ERREURS
+JT.deferr=function(res) {
+switch(res.message) {
+	case 'NODATA': Mess.error("<?asi18n('ERRNODATA');?>",res.message);
+		break;
+	default : Mess.error("<?asi18n('ERRDEFAULT');?>",res.message);
+	};
+};
+JT.defok=function(res) {
+switch(res.message) {
+	default: Mess.info("<?asi18n('BONNARD');?>");
+	};
+};
 
 //===================================
 //===================================
@@ -60,16 +88,16 @@ var regtab=/^(.*)\[\]$/;
 			if(pdata[id]) val=pdata[id]; //vraiment naze ce fonctionnement sur checkbox...
 			if($(this).attr('checked')) {
 				val=$(this).attr('value');
-				console.log("VALUE ="+val+"=");
+				// console.log("VALUE ="+val+"=");
 				}
 			break;
 			};
 		if(type=='checkbox') {
 			// val=($(this).attr('checked'))? 'x':'';
-			val='';
+			val='0';
 			if($(this).attr('checked')) {
 				val=$(this).attr('value');
-				if(!val) val='x';
+				if(!val) val='1';
 				};
 			break;
 			};
@@ -81,7 +109,7 @@ var regtab=/^(.*)\[\]$/;
 		break;
 	};
 	// enregistrement dans pdata, dans un tableau si c'est un champt HTML tableau
-	console.log('RetrieveTX Enregistrement valeur pour '+id+' ('+val+')');
+	// console.log('RetrieveTX Enregistrement valeur pour '+id+' ('+val+')');
 	if(regtab.exec(id)) {
 		tab=true;
 		id=RegExp.$1;

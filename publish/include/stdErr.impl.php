@@ -1,8 +1,8 @@
 <?
 //stdErr implementation to be included in class
 //if not entirely rewritten from scratch
-private errn=0;
-private errstr='';
+private $errn=0;
+private $errstr='';
 
 public function getErr(&$num,&$str) {
 	$num=$this->errn;
