@@ -20,13 +20,13 @@ $SAP->header(translate('TITLEFICHE'));
 <LEGEND><?i18n('LEGENDINSCRIPTION')?> <SPAN id="yearLabel">20xx-20yy</SPAN></LEGEND>
 <LABEL><?i18n('LABELDESINSCRIPTION')?></LABEL>
 <DIV>
-<INPUT name="hasResigned" type="radio" id="inscryes" class="TX" value='1'><LABEL for="inscryes"><?i18n('LABELINSCRYES')?></LABEL>
+<INPUT name="hasResigned" type="radio" id="inscryes" class="TX" value='0'><LABEL for="inscryes"><?i18n('LABELINSCRYES')?></LABEL>
 <BR>
-<INPUT name="hasResigned" type="radio" id="inscrno" class="TX" value=''><LABEL for="inscrno"><?i18n('LABELINSCRNO')?></LABEL>
+<INPUT name="hasResigned" type="radio" id="inscrno" class="TX" value='1'><LABEL for="inscrno"><?i18n('LABELINSCRNO')?></LABEL>
 <BR>
 <DIV id="resexplik" style="display: none">
-<INPUT name="resReason" type="text" id="resReason" class="TX STD" value=''>
-<SPAN class="ui-icon ui-icon-help" title="<?i18n('RESREASONTIP');?>">?</SPAN>
+<INPUT name="resReason" type="text" id="resReason" class="TX STD" value=''><BR>
+<?i18n('RESREASONTIP');?>
 </DIV>
 </DIV>
 </FIELDSET>
@@ -145,7 +145,7 @@ function fillform(res) {
 	
 	
 	//radiobuttons
-	if(res.hasResigned) {
+	if(res.hasResigned=='1') {
 		$('#inscrno').attr('checked',true);
 		$('#resexplik').slideDown();}
 	else $('#inscryes').attr('checked',true);

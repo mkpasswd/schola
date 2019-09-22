@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS adh (
 	isBureauMember BOOLEAN default false,
 	showAddress BOOLEAN default false,
 	isAdmin BOOLEAN default false,
-	jsonVals TEXT,
+	jsonVals JSON,
 	createTS TIMESTAMP default current_timestamp,
 	modifyTS TIMESTAMP default current_timestamp on update current_timestamp,
 	lastCallTS TIMESTAMP NULL,

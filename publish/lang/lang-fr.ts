@@ -30,12 +30,12 @@
 		<translation>Admin TS&amp;nbsp;:</translation>
 	</message>
 	<message>
-		<source>LABELAKEY</source>
-		<translation>Clef d'accès&amp;nbsp;:</translation>
-	</message>
-	<message>
 		<source>LABELADRESSE</source>
 		<translation>Adresse postale&amp;nbsp;:</translation>
+	</message>
+	<message>
+		<source>LABELAKEY</source>
+		<translation>Clef d'accès&amp;nbsp;:</translation>
 	</message>
 	<message>
 		<source>LABELALTO</source>
@@ -184,7 +184,36 @@
 	</message>
 	<message>
 		<source>RESREASONTIP</source>
-		<translation>Merci de préciser la raison de votre départ</translation>
+		<translation>Pouvez vous préciser la raison de votre départ ?
+&lt;BR&gt;
+Nous supprimerons vos coordonnées d'ici quelques semaines
+mais vous inscrirons à la newsletter.
+&lt;BR&gt;
+Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</translation>
+	</message>
+	<message>
+		<source>THACTIONS</source>
+		<translation>Actions</translation>
+	</message>
+	<message>
+		<source>THCATEGORY</source>
+		<translation>Pupitre</translation>
+	</message>
+	<message>
+		<source>THGIVENNAME</source>
+		<translation>Prénom</translation>
+	</message>
+	<message>
+		<source>THMAIL</source>
+		<translation>Mail</translation>
+	</message>
+	<message>
+		<source>THSN</source>
+		<translation>Nom</translation>
+	</message>
+	<message>
+		<source>THTELEPHONENUMBER</source>
+		<translation>Téléphone</translation>
 	</message>
 	<message>
 		<source>TITLEDEBUG</source>
@@ -198,4 +227,9 @@
 		<source>TITLELANGDUMP</source>
 		<translation>Dump fichier traduction</translation>
 	</message>
+	<message>
+		<source>TITLEUSERLIST</source>
+		<translation>Liste des Membres</translation>
+	</message>
 </context></TS>
+

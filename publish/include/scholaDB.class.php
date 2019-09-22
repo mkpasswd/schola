@@ -88,6 +88,7 @@ function dealDBErr() {
 	}
 
 function __construct($host,$user,$pass,$db,$port=3306) {
+	// echo "$host,$user,$pass,$db,$port";
 	$this->dblink=new mysqli($host,$user,$pass,$db,$port);
 	if(!($this->dblink)) $this->setErr($this->dblink->connect_errno,$this->dblink->connect_error);
 	else $this->dblink->set_charset('utf8');
@@ -110,14 +111,20 @@ public function directSQL($req) {
 	return $res;
 	}
 
-public function listUsers($extra='') {
-	$sql="select * from adh $extra";
+public function listUsers($where='',$sort='') {
+	$sql='select * from adh';
+	if($where) $sql.=" WHERE $where";
+	if($sort) $sql.=" ORDER BY $sort";
+	// echo "$sql\n";
 	$res=$this->directSQL($sql);
 	if($this->wtf()) return false;
 	$ret=array();
 	while($row=$res->fetch_assoc()) {
 		//traitement JSON à implanter
-		$ret[$row->id]=$row;
+		$extra=json_decode($row['jsonVals'],true);
+		if($extra) $row=array_merge($row,$extra);
+		// $ret[$row['id']]=$row;
+		$ret[]=$row;
 		};
 	$res->free();
 	return $ret;	

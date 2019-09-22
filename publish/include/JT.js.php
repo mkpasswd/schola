@@ -41,7 +41,8 @@ JT.deferr=function(res) {
 switch(res.message) {
 	case 'NODATA': Mess.error("<?asi18n('ERRNODATA');?>",res.message);
 		break;
-	default : Mess.error("<?asi18n('ERRDEFAULT');?>",res.message);
+	// default : Mess.error("<?asi18n('ERRDEFAULT');?>",res.message);
+	default : Mess.error("<?asi18n('ERRDEFAULT');?>",res.message+'<BR>'+res.answer);
 	};
 };
 JT.defok=function(res) {

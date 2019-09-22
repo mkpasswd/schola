@@ -1,6 +1,27 @@
 <?header('Content-type: text/css; charset=utf-8');?>
 /* <STYLE> */
 
+TABLE.ULIST TH {
+	background-color: yellow;
+	}
+
+TABLE.ULIST TR:nth-child(even){
+	background-color: rgba(128,128,128,.1);
+	}
+TABLE.ULIST TD.category {
+	text-align: center;
+	}
+
+TABLE.ULIST TD.givenName {
+	text-align: right;
+	font-weight: bold;
+	}
+
+TABLE.ULIST TD.sn {
+	text-transform: uppercase;
+	font-weight: bold;
+	}
+
 FIELDSET.fset .SUBSEL, FIELDSET.fset .SEL {display: inline-block}
 
 DIV.BIGINFO H1 {
