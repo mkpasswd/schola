@@ -1,0 +1,20 @@
+Subject: [SCHOLA] Mise a jour de vos donnees personnelles
+From: "Schola-Fichier Choristes" <schola-db@le-bagage.net>
+Bonjour {{GIVENNAME}},
+<P>Nous avons besoin de votre participation
+pour mettre à jour vos coordonnées
+dans notre fichier des choristes
+pour votre (ré)inscription à la Schola Cantorum de Nantes.
+</P>
+<P>Vous pouvez renseigner ceci facilement
+en suivant le lien ci-dessous :<BR>
+<A HREF="{{FICHEPERSO}}">{{FICHEPERSO}}</A>
+<BR>N'oubliez pas de cliquer le bouton "Mettre à jour la fiche"
+une fois que vous aurez terminé.
+</P>
+<P>Le cas échéant vous pourrez également indiquer
+que vous souhaitez quitter la Schola.
+</P>
+<P>Tout ceci devrait vous prendre moins de 30 secondes,
+merci pour votre participation.
+</P>

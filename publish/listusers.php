@@ -25,7 +25,7 @@ DIV.conflist {
 <H3><?i18n('SORTSELECTION')?></H3>
 <INPUT TYPE="radio" name="sort" id="s1" value="concat(sn,'-',givenName)" checked><LABEL for="s1"><?i18n('SORTDEFAULT')?></LABEL><BR>
 <INPUT TYPE="radio" name="sort" id="s2" value="concat(category,'-',sn,'-',givenName)"><LABEL for="s2"><?i18n('SORTCATEGORY')?></LABEL><BR>
-<INPUT TYPE="radio" name="sort" id="s3" value="userLastAccessTS"><LABEL for="s3"><?i18n('SORTLASTACESS')?></LABEL><BR>
+<INPUT TYPE="radio" name="sort" id="s3" value="lastUserAccessTS"><LABEL for="s3"><?i18n('SORTLASTACESS')?></LABEL><BR>
 <INPUT TYPE="checkbox" id="reverseOrder"><LABEL for="reverseOrder"><?i18n('SORTREVERSEORDER')?></LABEL>
 </DIV>
 <!-- === -->
@@ -52,6 +52,7 @@ DIV.conflist {
 <TD class="userLastAccessTS" style="display: none"></TD>
 <TD class="actions">
 <A href="" class="record"><SPAN class="ui-icon ui-icon-link"></A>
+<A href="" class="userrecord"><SPAN class="ui-icon ui-icon-person"></A>
 </TD>
 </TR>
 <TBODY>
@@ -91,6 +92,7 @@ function addLine(res) {
 	$(wl).find('.mail A').attr('href','mailto:'+res.mail).html(res.mail);
 	$(wl).children('.telephoneNumber').html(res.telephoneNumber);
 	$(wl).find('.actions A.record').attr('href','./record.php?id='+res.id);
+	$(wl).find('.actions A.userrecord').attr('href','./record.php?id='+res.id+'&check='+res.akey);
 	$(wl).show();
 	}
 
@@ -113,7 +115,6 @@ function solmaj() {
 			}
 		else {
 			JT.deferr(res);
-			JT.mainDisable();
 			};
 		});
 	}
