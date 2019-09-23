@@ -174,6 +174,14 @@
 		<translation>Nom et prénom</translation>
 	</message>
 	<message>
+		<source>LISTBUTTON</source>
+		<translation>Lister</translation>
+	</message>
+	<message>
+		<source>LISTUSER</source>
+		<translation>Lister les membres</translation>
+	</message>
+	<message>
 		<source>PUBLICTIP</source>
 		<translation>Je souhaite que mes coordonnées soient communiquées à l'ensemble des membres de la Schola&lt;BR&gt;
 &lt;B&gt;&lt;EM&gt;NB&lt;/EM&gt; : la Schola ne diffusera vos informations dans aucun autre cas.&lt;/B&gt;</translation>
@@ -190,6 +198,34 @@ Nous supprimerons vos coordonnées d'ici quelques semaines
 mais vous inscrirons à la newsletter.
 &lt;BR&gt;
 Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</translation>
+	</message>
+	<message>
+		<source>SHOWLASTACESS</source>
+		<translation>Afficher la date de dernier accès</translation>
+	</message>
+	<message>
+		<source>SHOWSELECTION</source>
+		<translation>Sélection de colonnes à afficher</translation>
+	</message>
+	<message>
+		<source>SORTCATEGORY</source>
+		<translation>Trier selon le pupitre</translation>
+	</message>
+	<message>
+		<source>SORTDEFAULT</source>
+		<translation>Nom et prénom</translation>
+	</message>
+	<message>
+		<source>SORTLASTACESS</source>
+		<translation>selon la date de dernier accès par le membre</translation>
+	</message>
+	<message>
+		<source>SORTREVERSEORDER</source>
+		<translation>afficher dans le sens inverse</translation>
+	</message>
+	<message>
+		<source>SORTSELECTION</source>
+		<translation>Tri à effectuer</translation>
 	</message>
 	<message>
 		<source>THACTIONS</source>
@@ -230,6 +266,30 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	<message>
 		<source>TITLEUSERLIST</source>
 		<translation>Liste des Membres</translation>
+	</message>
+	<message>
+		<source>WHERECURRENTYEAR</source>
+		<translation>Unique ment les inscriptions de l'année courante</translation>
+	</message>
+	<message>
+		<source>WHEREDEFAULT</source>
+		<translation>Tous</translation>
+	</message>
+	<message>
+		<source>WHERENOTRESIGNED</source>
+		<translation>Non démissionaires</translation>
+	</message>
+	<message>
+		<source>WHERERESIGNED</source>
+		<translation>Démissionaires</translation>
+	</message>
+	<message>
+		<source>WHERESELECTION</source>
+		<translation>Limiter les résultats</translation>
+	</message>
+	<message>
+		<source>WHEREYEARNOTRESIGNEDMAIL</source>
+		<translation>Avec un mail, pas démissionaire et dans l'année courante</translation>
 	</message>
 </context></TS>
 

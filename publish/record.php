@@ -70,6 +70,7 @@ $SAP->header(translate('TITLEFICHE'));
 
 <DIV class="actionbar">
 <BUTTON id="record" class="record"><?i18n('RECORD');?><SPAN class="ui-icon ui-icon-check">S</SPAN></Button>
+<BUTTON id="listusers" class="record admin" style="display: none"><?i18n('LISTUSER');?><SPAN class="ui-icon ui-icon-folder-open">L</SPAN></Button>
 </DIV>
 
 
@@ -164,6 +165,8 @@ function fillform(res) {
 	$('#yearLabel').html(res.yearLabel);
 	
 	if(res.currentUserIsAdmin=='1') $('.admin').slideDown();
+
+	$('#listusers').click(function() {document.location='./listusers.php';});
 
 	$('#record').click(function() {
 		var pdata=JT.retrieveTX();
