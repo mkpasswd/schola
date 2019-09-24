@@ -40,10 +40,12 @@ DIV.conflist {
 <BUTTON id="solmaj" class="record"><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
 </DIV>
 
-<!-- === -->
+<!-- === MODEL =========================================================== -->
+<!-- ===================================================================== -->
 <TABLE style="display: none">
 <TBODY id="lmodel">
 <TR>
+<TD class="numli"></TD>
 <TD><INPUT type="checkbox" CLASS="recsel"></TD>
 <TD class="category"></TD>
 <TD class="givenName"></TD>
@@ -58,11 +60,14 @@ DIV.conflist {
 </TR>
 <TBODY>
 </TABLE>
+<!-- ===================================================================== -->
+<!-- ===================================================================== -->
 
 <TABLE class="ULIST">
 <THEAD>
 <TR>
-<TH><INPUT type="checkbox" id="selectAll"></TD>
+<TH>#</TH>
+<TH><INPUT type="checkbox" id="selectAll"></TH>
 <TH><?i18n('THCATEGORY')?></TH>
 <TH><?i18n('THGIVENNAME')?></TH>
 <TH><?i18n('THSN')?></TH>
@@ -79,13 +84,17 @@ DIV.conflist {
 </TABLE>
 
 <SCRIPT>
+var numli=0;
+
 function addLine(res) {
+	numli++;
 	var html=$('#lmodel').html();
 	// console.log(html);
 	$('#ulist').append(html);
 	var wl=$('#ulist TR').last();
 	$(wl).addClass('userline');
 	$(wl).find('.recsel').attr('title',res.id).attr('DATA-ID',res.id);
+	$(wl).children('.numli').html(numli);
 	$(wl).children('.category').html(res.category);
 	$(wl).children('.sn').html(res.sn);
 	$(wl).children('.givenName').html(res.givenName);
@@ -98,6 +107,7 @@ function addLine(res) {
 	}
 
 function clearLines() {
+	numli=0;
 	$('.userline').slideUp(400,function() {$(this).remove();});
 	$('TABLE.ULIST TH.lastUserAccessTS').hide();
 	}
