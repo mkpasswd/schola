@@ -12,6 +12,12 @@ TABLE.ULIST TD.category {
 	text-align: center;
 	}
 
+TABLE.ULIST TD.lastUserAccessTS {
+	font-size: smaller;
+	font-style: italic;
+	vertical-align: middle;
+	}
+
 TABLE.ULIST TD.givenName {
 	text-align: right;
 	font-weight: bold;

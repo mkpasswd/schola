@@ -6,6 +6,18 @@
 		<translation>OK !</translation>
 	</message>
 	<message>
+		<source>SOLMAJBUTTON</source>
+		<translation>Envoyer un mail de sollicitation de MAJ</translation>
+	</message>
+	<message>
+		<source>WHERENOMAIL</source>
+		<translation>Sans mail</translation>
+	</message>
+	<message>
+		<source>THLASTUSERACCESSTS</source>
+		<translation>Dernier accès</translation>
+	</message>
+	<message>
 		<source>DEFTITLE</source>
 		<translation>GAS!</translation>
 	</message>
@@ -269,7 +281,7 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	</message>
 	<message>
 		<source>WHERECURRENTYEAR</source>
-		<translation>Unique ment les inscriptions de l'année courante</translation>
+		<translation>Uniquement les inscriptions de l'année courante</translation>
 	</message>
 	<message>
 		<source>WHEREDEFAULT</source>
