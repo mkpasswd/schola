@@ -2,6 +2,22 @@
 <context>
 	<name>ONE</name>
 	<message>
+		<source>WHEREFARACCESS</source>
+		<translation>Dernier accès il y a plus d'un mois</translation>
+	</message>
+	<message>
+		<source>WHERECLOSEACCESS</source>
+		<translation>Dernier accès il y a moins d'un mois</translation>
+	</message>
+	<message>
+		<source>SOLMAJMSG1LABEL</source>
+		<translation>Première sollicitation</translation>
+	</message>
+	<message>
+		<source>SOLMAJMSG2LABEL</source>
+		<translation>Relance</translation>
+	</message>
+	<message>
 		<source>BONNARD</source>
 		<translation>OK !</translation>
 	</message>

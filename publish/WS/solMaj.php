@@ -8,14 +8,15 @@ if(!$SAP->gpaccess()) {$a=new WSa(false,1,'INVALIDACCESSKEY');$a->send();exit;};
 if(!$SAP->isAdmin()) {$a=new WSa(false,2,'NEEDADMINPRIV');$a->send();exit;};
 $ids=T::gp('ids',array());
 if(!is_array($ids)) {$a=new WSa(false,3,'INCORRECTPARM','ids');$a->send();exit;};
-$numero=T::gp('numero',1);
+$msg=T::gp('msg','sol-1');
+$testaddress=T::gp('testaddress');
 
 $totdbproblem=0;
 $totnoaddress=0;
 $totmailsent=0;
 $recipients=array();
 $mail=new TMail();
-$mcontent=$SAP->getTrad()->i18nfile("mails/sol-$numero.txt");
+$mcontent=$SAP->getTrad()->i18nfile("mails/$msg.txt");
 $urlformat=SITE."/record.php?id=%s&check=%s";
 foreach($ids as $id) {
 	$id=intval($id);
@@ -26,9 +27,10 @@ foreach($ids as $id) {
 	$mail->importBody($mcontent);
 	$mail->fillGaps(array('{{GIVENNAME}}'=>$fiche['givenName'],
 	'{{FICHEPERSO}}'=>$url));
-	$mail->mail($fiche['mail']);
+	$dest=($testaddress)? $testaddress:$fiche['mail'];
 	$recipients[]=$fiche['mail'];
-	// $mail->mail('bob@localhost');
+	$mail->mail($dest);
+	//$mail->mail('maurice@localhost');
 	$totmailsent++;
 	};
 $a=new WSa(true,0,'OK',array("totdbproblem"=>$totdbproblem,

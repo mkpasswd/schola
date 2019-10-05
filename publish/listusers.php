@@ -17,16 +17,17 @@ DIV.conflist {
 <INPUT TYPE="radio" name="where" id="w1" value="" checked><LABEL for="w1"><?i18n('WHEREDEFAULT')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w2" value="hasResigned=false"><LABEL for="w2"><?i18n('WHERENOTRESIGNED')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w3" value="hasResigned=true"><LABEL for="w3"><?i18n('WHERERESIGNED')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w6" value="mail=''"><LABEL for="w6"><?i18n('WHERENOMAIL')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w5" value="hasResigned=false and mail<>'' and year=<?=$SAP->getConf()->cury?>"><LABEL for="w5"><?i18n('WHEREYEARNOTRESIGNEDMAIL')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w4" value="year=<?=$SAP->getConf()->cury?>"><LABEL for="w4"><?i18n('WHERECURRENTYEAR')?></LABEL><BR>
+<INPUT TYPE="radio" name="where" id="w6" value="lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w6"><?i18n('WHEREFARACCESS')?></LABEL><BR>
+<INPUT TYPE="radio" name="where" id="w7" value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w7"><?i18n('WHERECLOSEACCESS')?></LABEL><BR>
 </DIV>
 <!-- === -->
 <DIV id="sort" class="conflist">
 <H3><?i18n('SORTSELECTION')?></H3>
 <INPUT TYPE="radio" name="sort" id="s1" value="concat(sn,'-',givenName)" checked><LABEL for="s1"><?i18n('SORTDEFAULT')?></LABEL><BR>
 <INPUT TYPE="radio" name="sort" id="s2" value="concat(category,'-',sn,'-',givenName)"><LABEL for="s2"><?i18n('SORTCATEGORY')?></LABEL><BR>
-<INPUT TYPE="radio" name="sort" id="s3" value="concat(ifnull(lastUserAccessTS,'0000'),'-',sn,'-',givenName)"><LABEL for="s3"><?i18n('SORTLASTACESS')?></LABEL><BR>
+<INPUT TYPE="radio" name="sort" id="s3" value="lastUserAccessTS"><LABEL for="s3"><?i18n('SORTLASTACESS')?></LABEL><BR>
 <INPUT TYPE="checkbox" id="reverseOrder"><LABEL for="reverseOrder"><?i18n('SORTREVERSEORDER')?></LABEL>
 </DIV>
 <!-- === -->
@@ -37,11 +38,13 @@ DIV.conflist {
 
 <DIV class="actionbar">
 <BUTTON id="list" class="record"><?i18n('LISTBUTTON');?><SPAN class="ui-icon ui-icon-gear">S</SPAN></Button>
-<BUTTON id="solmaj" class="record"><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
+<BR>
+<BUTTON id="solmaj" class="record" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
+<INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></SPAN>
+<INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></SPAN>
 </DIV>
 
-<!-- === MODEL =========================================================== -->
-<!-- ===================================================================== -->
+<!-- =======LINE MODEL========= -->
 <TABLE style="display: none">
 <TBODY id="lmodel">
 <TR>
@@ -60,17 +63,16 @@ DIV.conflist {
 </TR>
 <TBODY>
 </TABLE>
-<!-- ===================================================================== -->
-<!-- ===================================================================== -->
+<!-- =======/LINE MODEL========= -->
 
 <TABLE class="ULIST">
 <THEAD>
 <TR>
 <TH>#</TH>
-<TH><INPUT type="checkbox" id="selectAll"></TH>
+<TH><INPUT type="checkbox" id="selectAll"></TD>
 <TH><?i18n('THCATEGORY')?></TH>
-<TH><?i18n('THGIVENNAME')?></TH>
 <TH><?i18n('THSN')?></TH>
+<TH><?i18n('THGIVENNAME')?></TH>
 <TH><?i18n('THMAIL')?></TH>
 <TH><?i18n('THTELEPHONENUMBER')?></TH>
 <TH class="lastUserAccessTS" style="display: none"><?i18n('THLASTUSERACCESSTS')?></TH>
@@ -108,8 +110,10 @@ function addLine(res) {
 
 function clearLines() {
 	numli=0;
-	$('.userline').slideUp(400,function() {$(this).remove();});
-	$('TABLE.ULIST TH.lastUserAccessTS').hide();
+	// $('.userline').slideUp(400,function() {$(this).remove();});
+	$('.userline').remove();
+	if(!($('#showLastAccess').is(':checked'))) 
+		$('TABLE.ULIST .lastUserAccessTS').hide();
 	}
 
 function solmaj() {
@@ -118,6 +122,9 @@ function solmaj() {
 	console.log(ids);
 	pdata={};
 	pdata.ids=ids;
+	// pdata.testaddress='one@toreceiveall';
+	pdata.msg=$('input[NAME=msg]:checked').val();
+	
 	$.post(WSBASE+'/solMaj.php',pdata,
 		function(res) {
 		if(res.yes)
@@ -141,6 +148,9 @@ function init() {
 		postAndFill();
 		});
 	$('#solmaj').click(solmaj);
+	$('.msgselect').click(function() {
+		$('#solmaj').attr('disabled',false);
+		});
 	}
 
 function postAndFill() {
@@ -155,7 +165,6 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	if(res.yes)
 		{
 		for( i=0;i<res.answer.length;i++) addLine(res.answer[i]);
-		// console.log('++++++++++++++++++++++++++++');
 		if($('#showLastAccess').is(':checked')) {
 			// console.log('=================');
 			$('TABLE.ULIST .lastUserAccessTS').show();
