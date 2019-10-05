@@ -42,6 +42,8 @@ DIV.conflist {
 <BUTTON id="solmaj" class="record" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
 <INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></SPAN>
 <INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></SPAN>
+<BR>
+<BUTTON id="create" class="record"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
 </DIV>
 
 <!-- =======LINE MODEL========= -->
@@ -147,6 +149,7 @@ function init() {
 		clearLines();
 		postAndFill();
 		});
+	$('#create').click(create);
 	$('#solmaj').click(solmaj);
 	$('.msgselect').click(function() {
 		$('#solmaj').attr('disabled',false);
@@ -169,6 +172,21 @@ $.post(WSBASE+'/listUsers.php',pdata,
 			// console.log('=================');
 			$('TABLE.ULIST .lastUserAccessTS').show();
 			};
+		}
+	else {
+		JT.deferr(res);
+		JT.mainDisable();
+		};
+	});
+}
+
+function create() {
+var pdata={};
+$.post(WSBASE+'/createUser.php',pdata,
+	function(res) {
+	if(res.yes)
+		{
+		window.location='./record.php?id='+res.answer;
 		}
 	else {
 		JT.deferr(res);

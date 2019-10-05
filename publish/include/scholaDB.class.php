@@ -172,6 +172,8 @@ public function insertUser($values=array()) {
 	}
 
 public function updateUser($id,$values=array()) {
+	$this->clearErr();
+	if(empty($values)) return true;
 	// var_dump($values);
 	$req='UPDATE adh SET ';
 	$addvirg='';

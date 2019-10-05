@@ -6,6 +6,10 @@
 		<translation>Dernier accès il y a plus d'un mois</translation>
 	</message>
 	<message>
+		<source>CREATEBUTTON</source>
+		<translation>Créer un nouvel adhérent</translation>
+	</message>
+	<message>
 		<source>WHERECLOSEACCESS</source>
 		<translation>Dernier accès il y a moins d'un mois</translation>
 	</message>
