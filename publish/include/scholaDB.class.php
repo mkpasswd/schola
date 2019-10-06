@@ -119,8 +119,9 @@ private function addJsonFields(&$row) {
 	*/
 	//make sure all records have the same number of fields
 	//in the same order, otherwise CSV export pb
-	foreach(self::$JSONFIELDS as $f)
-		$row[$f]=(isset($extra[$f]))? $extra[$f]:'';
+	foreach(array_keys(self::$JSONFIELDS) as $f) {
+		$row[$f]=(is_array($extra) && isset($extra[$f]))? $extra[$f]:'';
+		};
 	}
 
 public function listUsers($where='',$sort='') {
