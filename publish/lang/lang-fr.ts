@@ -2,40 +2,16 @@
 <context>
 	<name>ONE</name>
 	<message>
-		<source>WHEREFARACCESS</source>
-		<translation>Dernier accès il y a plus d'un mois</translation>
+		<source>BONNARD</source>
+		<translation>OK !</translation>
 	</message>
 	<message>
 		<source>CREATEBUTTON</source>
 		<translation>Créer un nouvel adhérent</translation>
 	</message>
 	<message>
-		<source>WHERECLOSEACCESS</source>
-		<translation>Dernier accès il y a moins d'un mois</translation>
-	</message>
-	<message>
-		<source>SOLMAJMSG1LABEL</source>
-		<translation>Première sollicitation</translation>
-	</message>
-	<message>
-		<source>SOLMAJMSG2LABEL</source>
-		<translation>Relance</translation>
-	</message>
-	<message>
-		<source>BONNARD</source>
-		<translation>OK !</translation>
-	</message>
-	<message>
-		<source>SOLMAJBUTTON</source>
-		<translation>Envoyer un mail de sollicitation de MAJ</translation>
-	</message>
-	<message>
-		<source>WHERENOMAIL</source>
-		<translation>Sans mail</translation>
-	</message>
-	<message>
-		<source>THLASTUSERACCESSTS</source>
-		<translation>Dernier accès</translation>
+		<source>CSVBUTTON</source>
+		<translation>Exporter (CSV)</translation>
 	</message>
 	<message>
 		<source>DEFTITLE</source>
@@ -214,6 +190,18 @@
 		<translation>Lister les membres</translation>
 	</message>
 	<message>
+		<source>LISTUSERBUTTONTIP</source>
+		<translation>Uniquement pour les administrateurs, donne un listing des membres</translation>
+	</message>
+	<message>
+		<source>MAILTIP</source>
+		<translation>Permet d'envoyer des messages préformatés aux membres</translation>
+	</message>
+	<message>
+		<source>PRINTCARDMSGLABEL</source>
+		<translation>Impression de la carte</translation>
+	</message>
+	<message>
 		<source>PUBLICTIP</source>
 		<translation>Je souhaite que mes coordonnées soient communiquées à l'ensemble des membres de la Schola&lt;BR&gt;
 &lt;B&gt;&lt;EM&gt;NB&lt;/EM&gt; : la Schola ne diffusera vos informations dans aucun autre cas.&lt;/B&gt;</translation>
@@ -221,6 +209,10 @@
 	<message>
 		<source>RECORD</source>
 		<translation>Mettre à jour la fiche</translation>
+	</message>
+	<message>
+		<source>RECORDBUTTONTIP</source>
+		<translation>Enregister la fiche dans la base de donnée</translation>
 	</message>
 	<message>
 		<source>RESREASONTIP</source>
@@ -238,6 +230,18 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	<message>
 		<source>SHOWSELECTION</source>
 		<translation>Sélection de colonnes à afficher</translation>
+	</message>
+	<message>
+		<source>SOLMAJBUTTON</source>
+		<translation>Envoyer un mail de sollicitation de MAJ</translation>
+	</message>
+	<message>
+		<source>SOLMAJMSG1LABEL</source>
+		<translation>Première sollicitation</translation>
+	</message>
+	<message>
+		<source>SOLMAJMSG2LABEL</source>
+		<translation>Relance</translation>
 	</message>
 	<message>
 		<source>SORTCATEGORY</source>
@@ -272,6 +276,10 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 		<translation>Prénom</translation>
 	</message>
 	<message>
+		<source>THLASTUSERACCESSTS</source>
+		<translation>Dernier accès</translation>
+	</message>
+	<message>
 		<source>THMAIL</source>
 		<translation>Mail</translation>
 	</message>
@@ -300,12 +308,24 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 		<translation>Liste des Membres</translation>
 	</message>
 	<message>
+		<source>WHERECLOSEACCESS</source>
+		<translation>Dernier accès il y a moins d'un mois</translation>
+	</message>
+	<message>
 		<source>WHERECURRENTYEAR</source>
 		<translation>Uniquement les inscriptions de l'année courante</translation>
 	</message>
 	<message>
 		<source>WHEREDEFAULT</source>
 		<translation>Tous</translation>
+	</message>
+	<message>
+		<source>WHEREFARACCESS</source>
+		<translation>Dernier accès il y a plus d'un mois</translation>
+	</message>
+	<message>
+		<source>WHERENOMAIL</source>
+		<translation>Sans mail</translation>
 	</message>
 	<message>
 		<source>WHERENOTRESIGNED</source>
@@ -324,4 +344,3 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 		<translation>Avec un mail, pas démissionaire et dans l'année courante</translation>
 	</message>
 </context></TS>
-

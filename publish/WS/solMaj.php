@@ -18,15 +18,20 @@ $recipients=array();
 $mail=new TMail();
 $mcontent=$SAP->getTrad()->i18nfile("mails/$msg.txt");
 $urlformat=SITE."/record.php?id=%s&check=%s";
+$printcardformat=SITE."/printcard.php?id=%s&check=%s";
 foreach($ids as $id) {
 	$id=intval($id);
 	if(!$SAP->db->updateTS($id,'lastCallTS')) {$totdbproblem++; continue;};
 	if(!($fiche=$SAP->db->getUser($id))) {$totdbproblem++; continue;};
 	if(!$fiche['mail']) {$totnoaddress++; continue;};
 	$url=sprintf($urlformat,$fiche['id'],$fiche['akey']);
+	$printcard=sprintf($printcardformat,$fiche['id'],$fiche['akey']);
 	$mail->importBody($mcontent);
-	$mail->fillGaps(array('{{GIVENNAME}}'=>$fiche['givenName'],
-	'{{FICHEPERSO}}'=>$url));
+	$mail->fillGaps(array(
+		'{{GIVENNAME}}'=>$fiche['givenName'],
+		'{{FICHEPERSO}}'=>$url,
+		'{{PRINTCARD}}'=>$printcard,
+		));
 	$dest=($testaddress)? $testaddress:$fiche['mail'];
 	$recipients[]=$fiche['mail'];
 	$mail->mail($dest);

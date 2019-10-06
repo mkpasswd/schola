@@ -37,14 +37,19 @@ DIV.conflist {
 </DIV>
 
 <DIV class="actionbar">
-<BUTTON id="list" class="record"><?i18n('LISTBUTTON');?><SPAN class="ui-icon ui-icon-gear">S</SPAN></Button>
+<BUTTON id="list" title="LISTBUTTONTIP"><?i18n('LISTBUTTON');?><SPAN class="ui-icon ui-icon-gear">S</SPAN></Button>
 <BR>
-<BUTTON id="solmaj" class="record" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
-<INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></SPAN>
-<INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></SPAN>
+<BUTTON id="solmaj" title="SOLMAJBUTTONTIP" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
+<INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></LABEL>
+<INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></LABEL>
+<INPUT id="msg3" type="radio" NAME="msg" value="print-card" class="msgselect"><Label for="msg3"><?i18n('PRINTCARDMSGLABEL');?></LABEL>
 <BR>
-<BUTTON id="create" class="record"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
+<BUTTON id="create" title="CREATEBUTTONTIP"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
+<BUTTON id="csvoutput" title="CSVBUTTONTIP"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
+<A id="download" download="schola.csv" style="display: none"><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
 </DIV>
+
+<!-- <TEXTAREA id="csvtext" cols="128" rows="10"></TEXTAREA>-->
 
 <!-- =======LINE MODEL========= -->
 <TABLE style="display: none">
@@ -89,6 +94,27 @@ DIV.conflist {
 
 <SCRIPT>
 var numli=0;
+$(function(){
+	postAndFill();
+	init();
+	});
+
+function init() {
+	$('#selectAll').click(function() {
+		if($(this).is(':checked')) $('input.recsel').attr('checked',true)
+		else $('input.recsel').attr('checked',false);
+		});
+	$('#list').click(function() {
+		clearLines();
+		postAndFill();
+		});
+	$('#create').click(create);
+	$('#csvoutput').click(csvOutput);
+	$('#solmaj').click(solmaj);
+	$('.msgselect').click(function() {
+		$('#solmaj').attr('disabled',false);
+		});
+	}
 
 function addLine(res) {
 	numli++;
@@ -118,51 +144,69 @@ function clearLines() {
 		$('TABLE.ULIST .lastUserAccessTS').hide();
 	}
 
-function solmaj() {
-	var ids=[];
-	$('.recsel:checked').each(function() {ids.push($(this).attr('DATA-ID'));});
-	console.log(ids);
-	pdata={};
-	pdata.ids=ids;
-	// pdata.testaddress='one@toreceiveall';
-	pdata.msg=$('input[NAME=msg]:checked').val();
-	
-	$.post(WSBASE+'/solMaj.php',pdata,
-		function(res) {
-		if(res.yes)
-			{
-			JT.defok(res);
-			$('.recsel:checked').attr('checked',false).attr('disabled',true);
-			}
-		else {
-			JT.deferr(res);
-			};
-		});
+function buildSearchParms() {
+	var pdata={};
+	pdata.check=JT.getURLParameter('check');
+	pdata.adm=JT.getURLParameter('adm');
+	pdata.sort=$('input[name=sort]:checked').val();
+	if(pdata.sort && $('#reverseOrder').is(':checked')) pdata.sort+=' DESC'; 
+	pdata.where=$('input[name=where]:checked').val();
+	return pdata;
 	}
 
-function init() {
-	$('#selectAll').click(function() {
-		if($(this).is(':checked')) $('input.recsel').attr('checked',true)
-		else $('input.recsel').attr('checked',false);
-		});
-	$('#list').click(function() {
-		clearLines();
-		postAndFill();
-		});
-	$('#create').click(create);
-	$('#solmaj').click(solmaj);
-	$('.msgselect').click(function() {
-		$('#solmaj').attr('disabled',false);
-		});
+function csvquotes(s) {
+	if(!s) return '';
+	return s.replace(/^\s*[\r\n]/gm,'').trim().replace('"','""');
 	}
+
+// ============= WS Calls handling ===============
+function csvOutput() {
+var SEP=';';
+var QUOTE='"';
+var CR="\n";
+var pdata=buildSearchParms();
+$.post(WSBASE+'/listUsers.php',pdata,
+	function(res) {
+	if(!res.yes) {
+		JT.deferr(res);
+		JT.mainDisable();
+		};
+	var count=0;
+	var csvheader='';
+	var cvsfile='';
+	for( i=0;i<res.answer.length;i++) {
+		var line=res.answer[i];
+		id=line.id;
+		if(!(line.id) || !($('input.recsel[DATA-ID='+line.id+']').is(':checked'))) continue;
+		count++;
+		var csvline='';
+		for (var key in line) {
+			if(key=='jsonVals'||key=='akey') continue;
+			if (line.hasOwnProperty(key)) {
+				// console.log('KEY='+key+' VALUE='+line[key]);
+				if(count==1) {
+					if(csvheader) csvheader+=SEP;
+					csvheader+=QUOTE+csvquotes(key)+QUOTE;
+					};
+				if(csvline) csvline+=SEP;
+				csvline+=QUOTE+csvquotes(line[key])+QUOTE;
+				}		
+			};
+		if(count==1) csvfile=csvheader;
+		csvfile+=CR+csvline;
+		};
+	// $('#csvtext').html(csvfile);
+	// $('#download').attr('href','data:text/csv;charset=utf-8;base64,'+btoa(csvfile));
+	$('#download').attr('href','data:text/csv;charset=utf-8,'+encodeURI(csvfile));
+	// $('#download').show();	
+	// $('#download').trigger('click');
+	var b=document.getElementById('download');
+	b.click();
+	});
+}
 
 function postAndFill() {
-var pdata={};
-pdata.check=JT.getURLParameter('check');
-pdata.adm=JT.getURLParameter('adm');
-pdata.sort=$('input[name=sort]:checked').val();
-if(pdata.sort && $('#reverseOrder').is(':checked')) pdata.sort+=' DESC'; 
-pdata.where=$('input[name=where]:checked').val();
+var pdata=buildSearchParms();
 $.post(WSBASE+'/listUsers.php',pdata,
 	function(res) {
 	if(res.yes)
@@ -195,10 +239,27 @@ $.post(WSBASE+'/createUser.php',pdata,
 	});
 }
 
-$(function(){
-	postAndFill();
-	init();
-	});
+function solmaj() {
+	var ids=[];
+	$('.recsel:checked').each(function() {ids.push($(this).attr('DATA-ID'));});
+	console.log(ids);
+	pdata={};
+	pdata.ids=ids;
+	// pdata.testaddress='one@toreceiveall';
+	pdata.msg=$('input[NAME=msg]:checked').val();
+	
+	$.post(WSBASE+'/solMaj.php',pdata,
+		function(res) {
+		if(res.yes)
+			{
+			JT.defok(res);
+			$('.recsel:checked').attr('checked',false).attr('disabled',true);
+			}
+		else {
+			JT.deferr(res);
+			};
+		});
+	}
 </SCRIPT>
 <?
 $SAP->tailer();

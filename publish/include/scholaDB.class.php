@@ -111,6 +111,18 @@ public function directSQL($req) {
 	return $res;
 	}
 
+private function addJsonFields(&$row) {
+	$extra=json_decode($row['jsonVals'],true);
+	/*	if($extra) $row=array_merge($row,$extra);
+	foreach(self::$JSONFIELDS as $f)
+		if (!isset($row[$f])) $row[$f]='';
+	*/
+	//make sure all records have the same number of fields
+	//in the same order, otherwise CSV export pb
+	foreach(self::$JSONFIELDS as $f)
+		$row[$f]=(isset($extra[$f]))? $extra[$f]:'';
+	}
+
 public function listUsers($where='',$sort='') {
 	$sql='select * from adh';
 	if($where) $sql.=" WHERE $where";
@@ -120,10 +132,7 @@ public function listUsers($where='',$sort='') {
 	if($this->wtf()) return false;
 	$ret=array();
 	while($row=$res->fetch_assoc()) {
-		//traitement JSON à implanter
-		$extra=json_decode($row['jsonVals'],true);
-		if($extra) $row=array_merge($row,$extra);
-		// $ret[$row['id']]=$row;
+		$this->addJsonFields($row);
 		$ret[]=$row;
 		};
 	$res->free();
@@ -138,8 +147,7 @@ public function getUser($id) {
 	if($res->num_rows!=1) return $this->setErr(667,'Unknown User ID');
 	$row=$res->fetch_assoc();
 	// $extra=json_decode(base64_decode($row['jsonVals']),true);
-	$extra=json_decode($row['jsonVals'],true);
-	if($extra) $row=array_merge($row,$extra);
+	$this->addJsonFields($row);
 	$ret=$row;
 	$res->free();
 	return $ret;	

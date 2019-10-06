@@ -36,7 +36,7 @@ $SAP->header(translate('TITLEFICHE'));
 <LEGEND><?i18n('LEGENDCONTACTER')?></LEGEND>
 
 <LABEL for="mail"><?i18n('LABELMAIL')?></LABEL>
-<INPUT type="text" id="mail" class="TX STD">
+<INPUT type="text" id="mail" class="TX STD"><?i18n('MAILTIP')?>
 <BR>
 
 <LABEL for="telephoneNumber"><?i18n('LABELTELEPHONE')?></LABEL>
@@ -69,8 +69,8 @@ $SAP->header(translate('TITLEFICHE'));
 
 
 <DIV class="actionbar">
-<BUTTON id="record" class="record"><?i18n('RECORD');?><SPAN class="ui-icon ui-icon-check">S</SPAN></Button>
-<BUTTON id="listusers" class="record admin" style="display: none"><?i18n('LISTUSER');?><SPAN class="ui-icon ui-icon-folder-open">L</SPAN></Button>
+<BUTTON id="record" title="<?i18n('RECORDBUTTONTIP');?>"><?i18n('RECORD');?><SPAN class="ui-icon ui-icon-check">S</SPAN></Button>
+<BUTTON id="listusers" class="admin" style="display: none" title="<?i18n('LISTUSERBUTTONTIP');?>"><?i18n('LISTUSER');?><SPAN class="ui-icon ui-icon-folder-open">L</SPAN></Button>
 </DIV>
 
 
