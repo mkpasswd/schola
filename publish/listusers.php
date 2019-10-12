@@ -47,6 +47,8 @@ DIV.conflist {
 <BR>
 <BUTTON id="create" title="CREATEBUTTONTIP"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
 <BUTTON id="csvoutput" title="CSVBUTTONTIP"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
+<INPUT id="flatify" type="checkbox" value="X" ><Label for="flatify"><?i18n('FLATIFYLABEL');?></LABEL>
+
 <A id="download" download="schola.csv" style="display: none"><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
 </DIV>
 
@@ -193,6 +195,10 @@ function csvOutput() {
 var SEP=';';
 var QUOTE='"';
 var CR="\n";
+if(numsel<1) {
+	Mess.error("<?asi18n('ERRNOSELECTION');?>");
+	return;
+	};
 var pdata=buildSearchParms();
 $.post(WSBASE+'/listUsers.php',pdata,
 	function(res) {
@@ -203,6 +209,8 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	var count=0;
 	var csvheader='';
 	var cvsfile='';
+	var flatify=$('#flatify').is(':checked');
+	console.log('flatify : '+flatify);
 	for( i=0;i<res.answer.length;i++) {
 		var line=res.answer[i];
 		id=line.id;
@@ -218,7 +226,8 @@ $.post(WSBASE+'/listUsers.php',pdata,
 					csvheader+=QUOTE+csvquotes(key)+QUOTE;
 					};
 				if(csvline) csvline+=SEP;
-				csvline+=QUOTE+csvquotes(line[key])+QUOTE;
+				if(flatify) csvline+=QUOTE+csvquotes(line[key]).replace(/(\r\n|\r|\n)/g,' ')+QUOTE
+				else csvline+=QUOTE+csvquotes(line[key])+QUOTE;
 				}		
 			};
 		if(count==1) csvfile=csvheader;

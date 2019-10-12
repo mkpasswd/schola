@@ -30,6 +30,14 @@
 		<translation>Pas de données pour ce membre...</translation>
 	</message>
 	<message>
+		<source>ERRNOSELECTION</source>
+		<translation>Faire une sélection au préalable...</translation>
+	</message>
+	<message>
+		<source>FLATIFYLABEL</source>
+		<translation>supprimer les sauts de ligne dans les cellules</translation>
+	</message>
+	<message>
 		<source>HEADERDESC</source>
 		<translation>Application de gestion des adhérents de la Schola Cantorum de Nantes</translation>
 	</message>
