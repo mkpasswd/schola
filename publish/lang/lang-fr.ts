@@ -313,7 +313,11 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	</message>
 	<message>
 		<source>WHERECURRENTYEAR</source>
-		<translation>Uniquement les inscriptions de l'année courante</translation>
+		<translation>Uniquement les inscriptions de l'année courante non démissionaire</translation>
+	</message>
+	<message>
+		<source>WHERECURRENTYEARANDSHOWADDRESS</source>
+		<translation>Personnes OK pour diffusion coordonnées</translation>
 	</message>
 	<message>
 		<source>WHEREDEFAULT</source>

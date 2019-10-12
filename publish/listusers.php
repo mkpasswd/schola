@@ -14,19 +14,20 @@ DIV.conflist {
 <!-- === -->
 <DIV id="where" class="conflist">
 <H3><?i18n('WHERESELECTION')?></H3>
+<INPUT class='WHEREDEFAULT' TYPE="radio" name="where" id="w4" value="year=<?=$SAP->getConf()->cury?> and hasResigned=false"><LABEL for="w4"><?i18n('WHERECURRENTYEAR')?></LABEL><BR>
+<INPUT TYPE="radio" name="where" id="w8" value="year=<?=$SAP->getConf()->cury?> and hasResigned=false and showAddress=true"><LABEL for="w8"><?i18n('WHERECURRENTYEARANDSHOWADDRESS')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w1" value="" checked><LABEL for="w1"><?i18n('WHEREDEFAULT')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w2" value="hasResigned=false"><LABEL for="w2"><?i18n('WHERENOTRESIGNED')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w3" value="hasResigned=true"><LABEL for="w3"><?i18n('WHERERESIGNED')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w5" value="hasResigned=false and mail<>'' and year=<?=$SAP->getConf()->cury?>"><LABEL for="w5"><?i18n('WHEREYEARNOTRESIGNEDMAIL')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w4" value="year=<?=$SAP->getConf()->cury?>"><LABEL for="w4"><?i18n('WHERECURRENTYEAR')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w6" value="lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w6"><?i18n('WHEREFARACCESS')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w7" value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w7"><?i18n('WHERECLOSEACCESS')?></LABEL><BR>
 </DIV>
 <!-- === -->
 <DIV id="sort" class="conflist">
 <H3><?i18n('SORTSELECTION')?></H3>
+<INPUT class='SORTDEFAULT' TYPE="radio" name="sort" id="s2" value="concat(category,'-',sn,'-',givenName)"><LABEL for="s2"><?i18n('SORTCATEGORY')?></LABEL><BR>
 <INPUT TYPE="radio" name="sort" id="s1" value="concat(sn,'-',givenName)" checked><LABEL for="s1"><?i18n('SORTDEFAULT')?></LABEL><BR>
-<INPUT TYPE="radio" name="sort" id="s2" value="concat(category,'-',sn,'-',givenName)"><LABEL for="s2"><?i18n('SORTCATEGORY')?></LABEL><BR>
 <INPUT TYPE="radio" name="sort" id="s3" value="lastUserAccessTS"><LABEL for="s3"><?i18n('SORTLASTACESS')?></LABEL><BR>
 <INPUT TYPE="checkbox" id="reverseOrder"><LABEL for="reverseOrder"><?i18n('SORTREVERSEORDER')?></LABEL>
 </DIV>
@@ -75,7 +76,7 @@ DIV.conflist {
 <TABLE class="ULIST">
 <THEAD>
 <TR>
-<TH>#</TH>
+<TH class="numli"><SPAN id="selcount">0</SPAN>/<SPAN id="count">0</SPAN></TH>
 <TH><INPUT type="checkbox" id="selectAll"></TD>
 <TH><?i18n('THCATEGORY')?></TH>
 <TH><?i18n('THSN')?></TH>
@@ -94,15 +95,35 @@ DIV.conflist {
 
 <SCRIPT>
 var numli=0;
+var numsel=0;
+
+function setselcount() {
+	$('#selcount').html(numsel);
+	}
+
+function setcount() {
+	$('#count').html(numli);
+	}
+
 $(function(){
+	$('.WHEREDEFAULT').first().attr('checked',true);
+	$('.SORTDEFAULT').first().attr('checked',true);
 	postAndFill();
 	init();
 	});
 
 function init() {
 	$('#selectAll').click(function() {
-		if($(this).is(':checked')) $('input.recsel').attr('checked',true)
-		else $('input.recsel').attr('checked',false);
+		if($(this).is(':checked')) {
+			$('input.recsel').attr('checked',true);
+			numsel=numli;
+			setselcount();
+			}	
+		else {
+			$('input.recsel').attr('checked',false);
+			numsel=0;
+			setselcount();
+			};
 		});
 	$('#list').click(function() {
 		clearLines();
@@ -113,6 +134,11 @@ function init() {
 	$('#solmaj').click(solmaj);
 	$('.msgselect').click(function() {
 		$('#solmaj').attr('disabled',false);
+		});
+	$('.recsel').live('click',function() {
+		if($(this).is(':checked')) numsel++
+		else numsel--;
+		setselcount();
 		});
 	}
 
@@ -134,10 +160,13 @@ function addLine(res) {
 	$(wl).find('.actions A.record').attr('href','./record.php?id='+res.id);
 	$(wl).find('.actions A.userrecord').attr('href','./record.php?id='+res.id+'&check='+res.akey);
 	$(wl).show();
+	setcount();
 	}
 
 function clearLines() {
-	numli=0;
+	numli=numsel=0;
+	setcount();
+	setselcount();
 	// $('.userline').slideUp(400,function() {$(this).remove();});
 	$('.userline').remove();
 	if(!($('#showLastAccess').is(':checked'))) 

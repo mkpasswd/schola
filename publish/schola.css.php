@@ -9,7 +9,7 @@ TABLE.ULIST TR:nth-child(even){
 	background-color: rgba(128,128,128,.1);
 	}
 
-TABLE.ULIST TD.numli {
+TABLE.ULIST .numli {
 	font-size: x-small;
 	font-style: italic;
 	text-align: right;
