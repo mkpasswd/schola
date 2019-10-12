@@ -10,6 +10,10 @@
 		<translation>Créer un nouvel adhérent</translation>
 	</message>
 	<message>
+		<source>MULTIMAILTIP</source>
+		<translation>Séparez les adresses avec des virgules si vous souhaitez en indiquer plusieurs</translation>
+	</message>
+	<message>
 		<source>CSVBUTTON</source>
 		<translation>Exporter (CSV)</translation>
 	</message>

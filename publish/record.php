@@ -36,7 +36,7 @@ $SAP->header(translate('TITLEFICHE'));
 <LEGEND><?i18n('LEGENDCONTACTER')?></LEGEND>
 
 <LABEL for="mail"><?i18n('LABELMAIL')?></LABEL>
-<INPUT type="text" id="mail" class="TX STD"><?i18n('MAILTIP')?>
+<INPUT type="text" id="mail" class="TX STD"><SPAN class="ui-icon ui-icon-help" title="<?asi18n('MULTIMAILTIP')?>">?</SPAN>
 <BR>
 
 <LABEL for="telephoneNumber"><?i18n('LABELTELEPHONE')?></LABEL>
