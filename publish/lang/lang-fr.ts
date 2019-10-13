@@ -10,12 +10,16 @@
 		<translation>Créer un nouvel adhérent</translation>
 	</message>
 	<message>
-		<source>MULTIMAILTIP</source>
-		<translation>Séparez les adresses avec des virgules si vous souhaitez en indiquer plusieurs</translation>
+		<source>CREATEBUTTONTIP</source>
+		<translation>Crée une fiche totalement vide pour ajouter un nouveau membre</translation>
 	</message>
 	<message>
 		<source>CSVBUTTON</source>
 		<translation>Exporter (CSV)</translation>
+	</message>
+	<message>
+		<source>CSVBUTTONTIP</source>
+		<translation>Permet de télécharger une extraction à traiter dans un tableur</translation>
 	</message>
 	<message>
 		<source>DEFTITLE</source>
@@ -198,6 +202,10 @@
 		<translation>Lister</translation>
 	</message>
 	<message>
+		<source>LISTBUTTONTIP</source>
+		<translation>Construit la liste des membres en fonction des paramètres saisis plus haut</translation>
+	</message>
+	<message>
 		<source>LISTUSER</source>
 		<translation>Lister les membres</translation>
 	</message>
@@ -206,8 +214,20 @@
 		<translation>Uniquement pour les administrateurs, donne un listing des membres</translation>
 	</message>
 	<message>
+		<source>MAILINGLISTBUTTONTIP</source>
+		<translation>Fournit la liste des email pour les personnes sélectionnées</translation>
+	</message>
+	<message>
+		<source>MAILINLISTBUTTON</source>
+		<translation>Liste des emails</translation>
+	</message>
+	<message>
 		<source>MAILTIP</source>
 		<translation>Permet d'envoyer des messages préformatés aux membres</translation>
+	</message>
+	<message>
+		<source>MULTIMAILTIP</source>
+		<translation>Séparez les adresses avec des virgules si vous souhaitez en indiquer plusieurs</translation>
 	</message>
 	<message>
 		<source>PRINTCARDMSGLABEL</source>
@@ -246,6 +266,10 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	<message>
 		<source>SOLMAJBUTTON</source>
 		<translation>Envoyer un mail de sollicitation de MAJ</translation>
+	</message>
+	<message>
+		<source>SOLMAJBUTTONTIP</source>
+		<translation>Sollicte une mise à jour de la fiche avec un message prédéfini</translation>
 	</message>
 	<message>
 		<source>SOLMAJMSG1LABEL</source>
@@ -360,3 +384,4 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 		<translation>Avec un mail, pas démissionaire et dans l'année courante</translation>
 	</message>
 </context></TS>
+

@@ -3,7 +3,7 @@ include('./mini.inc.php');
 include('global.inc.php');
 $SAP->header(translate('TITLEUSERLIST'));
 ?>
-<!-- ================================= -->
+<!-- REQUEST PARAMETERS ============================ -->
 <STYLE>
 DIV.conflist {
 	width: 32%;
@@ -37,23 +37,26 @@ DIV.conflist {
 <INPUT TYPE="checkbox" id="showLastAccess"><LABEL for="showLastAccess"><?i18n('SHOWLASTACESS')?></LABEL><BR>
 </DIV>
 
+<!-- ACTION BUTTONS ================================ -->
 <DIV class="actionbar">
-<BUTTON id="list" title="LISTBUTTONTIP"><?i18n('LISTBUTTON');?><SPAN class="ui-icon ui-icon-gear">S</SPAN></Button>
+<BUTTON id="list" title="<?i18n('LISTBUTTONTIP');?>"><?i18n('LISTBUTTON');?><SPAN class="ui-icon ui-icon-gear">S</SPAN></Button>
 <BR>
-<BUTTON id="solmaj" title="SOLMAJBUTTONTIP" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
+<BUTTON id="solmaj" title="<?i18n('SOLMAJBUTTONTIP');?>" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
 <INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></LABEL>
 <INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></LABEL>
 <INPUT id="msg3" type="radio" NAME="msg" value="print-card" class="msgselect"><Label for="msg3"><?i18n('PRINTCARDMSGLABEL');?></LABEL>
 <BR>
-<BUTTON id="create" title="CREATEBUTTONTIP"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
-<BUTTON id="csvoutput" title="CSVBUTTONTIP"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
+<BUTTON id="create" title="<?i18n('CREATEBUTTONTIP');?>"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
+<BUTTON id="csvoutput" title="<?i18n('CSVBUTTONTIP');?>"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
 <INPUT id="flatify" type="checkbox" value="X" ><Label for="flatify"><?i18n('FLATIFYLABEL');?></LABEL>
+<BUTTON id="mailinglist" title="<?i18n('MAILINGLISTBUTTONTIP');?>"><?i18n('MAILINLISTBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">D</SPAN></Button>
 
 <A id="download" download="schola.csv" style="display: none"><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
 </DIV>
 
 <!-- <TEXTAREA id="csvtext" cols="128" rows="10"></TEXTAREA>-->
 
+<!-- HTML OUTPUT ZONE ============================== -->
 <!-- =======LINE MODEL========= -->
 <TABLE style="display: none">
 <TBODY id="lmodel">
@@ -75,6 +78,7 @@ DIV.conflist {
 </TABLE>
 <!-- =======/LINE MODEL========= -->
 
+<!-- ======= ACTUAL LIST ======= -->
 <TABLE class="ULIST">
 <THEAD>
 <TR>
@@ -96,17 +100,16 @@ DIV.conflist {
 </TABLE>
 
 <SCRIPT>
+//CSV CONFIGURATION ==============================
+var SEP=';';
+var QUOTE='"';
+var CR="\n";
+
+// GLOBALS =======================================
 var numli=0;
 var numsel=0;
 
-function setselcount() {
-	$('#selcount').html(numsel);
-	}
-
-function setcount() {
-	$('#count').html(numli);
-	}
-
+// MAIN ==========================================
 $(function(){
 	$('.WHEREDEFAULT').first().attr('checked',true);
 	$('.SORTDEFAULT').first().attr('checked',true);
@@ -132,6 +135,7 @@ function init() {
 		postAndFill();
 		});
 	$('#create').click(create);
+	$('#mailinglist').click(mailinglistOutput);
 	$('#csvoutput').click(csvOutput);
 	$('#solmaj').click(solmaj);
 	$('.msgselect').click(function() {
@@ -144,6 +148,7 @@ function init() {
 		});
 	}
 
+// HTML TABLE OUTPUT ==================================
 function addLine(res) {
 	numli++;
 	var html=$('#lmodel').html();
@@ -175,6 +180,7 @@ function clearLines() {
 		$('TABLE.ULIST .lastUserAccessTS').hide();
 	}
 
+// UTILITIES =====================================
 function buildSearchParms() {
 	var pdata={};
 	pdata.check=JT.getURLParameter('check');
@@ -185,16 +191,40 @@ function buildSearchParms() {
 	return pdata;
 	}
 
+function setselcount() { $('#selcount').html(numsel); }
+function setcount() { $('#count').html(numli); }
 function csvquotes(s) {
 	if(!s) return '';
 	return s.replace(/^\s*[\r\n]/gm,'').trim().replace('"','""');
 	}
 
-// ============= WS Calls handling ===============
+// MAILING LIST OUTPUT ===========================
+// unlike CSV output we do not re-read WS
+function mailinglistOutput() {
+if(numsel<1) {
+	Mess.error("<?asi18n('ERRNOSELECTION');?>");
+	return;
+	};
+var ml=[];
+$('input.recsel:checked').each(function() {
+	var mails=$(this).parent().parent().find('TD.mail A').attr('href').split(',');
+	for(var i=0;i<mails.length;i++) {
+		var mail=mails[i].trim().replace('mailto:','');
+		if(mail) ml.push(mail.toLowerCase());
+		};
+	});
+ml.sort();
+$('#download').attr('href','data:text/plain;charset=utf-8,'+encodeURI(ml.join(CR)));
+$('#download').attr('download','schola-emails.txt');
+var b=document.getElementById('download');
+b.click();
+}
+
+
+// ============= WS Calls functions ==============
+
+// CSV OUTPUT ====================================
 function csvOutput() {
-var SEP=';';
-var QUOTE='"';
-var CR="\n";
 if(numsel<1) {
 	Mess.error("<?asi18n('ERRNOSELECTION');?>");
 	return;
@@ -236,6 +266,7 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	// $('#csvtext').html(csvfile);
 	// $('#download').attr('href','data:text/csv;charset=utf-8;base64,'+btoa(csvfile));
 	$('#download').attr('href','data:text/csv;charset=utf-8,'+encodeURI(csvfile));
+	$('#download').attr('download','schola-'+(new Date().toISOString().substr(0,10))+'.csv');
 	// $('#download').show();	
 	// $('#download').trigger('click');
 	var b=document.getElementById('download');
@@ -243,6 +274,7 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	});
 }
 
+// SEARCH AND CRETE HTML TABLE ===================
 function postAndFill() {
 var pdata=buildSearchParms();
 $.post(WSBASE+'/listUsers.php',pdata,
@@ -262,6 +294,7 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	});
 }
 
+// CREATE NEW ENTRY ==============================
 function create() {
 var pdata={};
 $.post(WSBASE+'/createUser.php',pdata,
@@ -277,6 +310,7 @@ $.post(WSBASE+'/createUser.php',pdata,
 	});
 }
 
+// MAILING BATCH =================================
 function solmaj() {
 	var ids=[];
 	$('.recsel:checked').each(function() {ids.push($(this).attr('DATA-ID'));});
@@ -299,6 +333,7 @@ function solmaj() {
 		});
 	}
 </SCRIPT>
+
 <?
 $SAP->tailer();
 ?>
