@@ -214,6 +214,8 @@ $('input.recsel:checked').each(function() {
 		};
 	});
 ml.sort();
+//remove duplicates
+ml=Array.from(new Set(ml));
 $('#download').attr('href','data:text/plain;charset=utf-8,'+encodeURI(ml.join(CR)));
 $('#download').attr('download','schola-emails.txt');
 var b=document.getElementById('download');
