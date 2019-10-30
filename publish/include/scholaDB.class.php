@@ -170,6 +170,13 @@ public function updateTS($id,$tsfield) {
 	return !$this->wtf();
 	}
 
+public function inactivateAll() {
+	$sql="update adh set isActive=false";
+	$res=$this->directSQL($sql);
+	$this->dealDBErr();
+	return !$this->wtf();
+	}
+
 public function insertUser($values=array()) {
 	$sql='insert into adh set akey=md5(concat(rand(),rand()))';
 	$res=$this->directSQL($sql);

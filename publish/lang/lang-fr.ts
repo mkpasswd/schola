@@ -6,6 +6,14 @@
 		<translation>OK !</translation>
 	</message>
 	<message>
+		<source>WHEREPRINTCARDOK</source>
+		<translation>Année courant et actif (impression carte possible)</translation>
+	</message>
+	<message>
+		<source>ALLOWINACTIVATELABEL</source>
+		<translation>Autoriser la désactivation de tous les usagers</translation>
+	</message>
+	<message>
 		<source>CREATEBUTTON</source>
 		<translation>Créer un nouvel adhérent</translation>
 	</message>
@@ -26,28 +34,84 @@
 		<translation>GAS!</translation>
 	</message>
 	<message>
+		<source>ERRCANTCREATE</source>
+		<translation>Création impossible (problème technique)</translation>
+	</message>
+	<message>
+		<source>ERRCANTUPDATE</source>
+		<translation>Mise à jour impossible (problème technique)</translation>
+	</message>
+	<message>
 		<source>ERRDEFAULT</source>
 		<translation>Fiche inaccessible avec ces codes...</translation>
+	</message>
+	<message>
+		<source>ERRINCORRECTPARM</source>
+		<translation>Paramètre d'envoi de mail incorrect</translation>
+	</message>
+	<message>
+		<source>ERRINVALIDACCESSKEY</source>
+		<translation>Clef d'accès erroné, accès refusé</translation>
 	</message>
 	<message>
 		<source>ERRJSONDEFUNC</source>
 		<translation>Problème d'accès au serveur...</translation>
 	</message>
 	<message>
+		<source>ERRMISSINGID</source>
+		<translation>Numéro d'adhérent manquant</translation>
+	</message>
+	<message>
+		<source>ERRNEEDADMINPRIV</source>
+		<translation>Cette opération réclame des privilèges d'administration dont vous ne disposez pas</translation>
+	</message>
+	<message>
 		<source>ERRNODATA</source>
 		<translation>Pas de données pour ce membre...</translation>
+	</message>
+	<message>
+		<source>ERRNORECORD</source>
+		<translation>Enregistrement inconnu</translation>
 	</message>
 	<message>
 		<source>ERRNOSELECTION</source>
 		<translation>Faire une sélection au préalable...</translation>
 	</message>
 	<message>
+		<source>ERRNOVALID</source>
+		<translation>Invalide</translation>
+	</message>
+	<message>
+		<source>ERRREQERROR</source>
+		<translation>Requête de base de donnée invalide</translation>
+	</message>
+	<message>
+		<source>ERRTECHPB</source>
+		<translation>Problème technique, il manque un fichier</translation>
+	</message>
+	<message>
 		<source>FLATIFYLABEL</source>
 		<translation>supprimer les sauts de ligne dans les cellules</translation>
 	</message>
 	<message>
+		<source>GETCARD</source>
+		<translation>Imprimer la carte</translation>
+	</message>
+	<message>
+		<source>GETCARDBUTTONTIP</source>
+		<translation>Permet d'obtenir une image à imprimer à découper pour disposer de la carte d'adhérent</translation>
+	</message>
+	<message>
 		<source>HEADERDESC</source>
 		<translation>Application de gestion des adhérents de la Schola Cantorum de Nantes</translation>
+	</message>
+	<message>
+		<source>INACTIVATEBUTTON</source>
+		<translation>Inactiver tous les membres</translation>
+	</message>
+	<message>
+		<source>INACTIVATEBUTTONTIP</source>
+		<translation>Les adhérents ne pourront plus imprimer leur carte tant qu'ils n'auront pas été réactivés</translation>
 	</message>
 	<message>
 		<source>LABELADMMODIF</source>

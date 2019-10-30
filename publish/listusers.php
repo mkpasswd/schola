@@ -21,6 +21,7 @@ DIV.conflist {
 <INPUT TYPE="radio" name="where" id="w3" value="hasResigned=true"><LABEL for="w3"><?i18n('WHERERESIGNED')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w5" value="hasResigned=false and mail<>'' and year=<?=$SAP->getConf()->cury?>"><LABEL for="w5"><?i18n('WHEREYEARNOTRESIGNEDMAIL')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w6" value="lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w6"><?i18n('WHEREFARACCESS')?></LABEL><BR>
+<INPUT TYPE="radio" name="where" id="w9" value="year=<?=$SAP->getConf()->cury?> and isActive=true"><LABEL for="w9"><?i18n('WHEREPRINTCARDOK')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w7" value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w7"><?i18n('WHERECLOSEACCESS')?></LABEL><BR>
 </DIV>
 <!-- === -->
@@ -47,18 +48,21 @@ DIV.conflist {
 <INPUT id="msg3" type="radio" NAME="msg" value="print-card" class="msgselect"><Label for="msg3"><?i18n('PRINTCARDMSGLABEL');?></LABEL>
 <BR>
 <BUTTON id="create" title="<?i18n('CREATEBUTTONTIP');?>"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
+<BUTTON id="inactivateAll" title="<?i18n('INACTIVATEBUTTONTIP');?>" disabled><?i18n('INACTIVATEBUTTON');?><SPAN class="ui-icon ui-icon-eject">I</SPAN></Button>
+<INPUT id="allowInactivate" type="checkbox" value="X" ><Label for="allowInactivate"><?i18n('ALLOWINACTIVATELABEL');?></LABEL>
+<BR>
 <BUTTON id="csvoutput" title="<?i18n('CSVBUTTONTIP');?>"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
 <INPUT id="flatify" type="checkbox" value="X" ><Label for="flatify"><?i18n('FLATIFYLABEL');?></LABEL>
 <BUTTON id="mailinglist" title="<?i18n('MAILINGLISTBUTTONTIP');?>"><?i18n('MAILINLISTBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">D</SPAN></Button>
 
-<A id="download" download="schola.csv" style="display: none"><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
+<A id="download" download="schola.csv" hidden><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
 </DIV>
 
 <!-- <TEXTAREA id="csvtext" cols="128" rows="10"></TEXTAREA>-->
 
 <!-- HTML OUTPUT ZONE ============================== -->
 <!-- =======LINE MODEL========= -->
-<TABLE style="display: none">
+<TABLE hidden>
 <TBODY id="lmodel">
 <TR>
 <TD class="numli"></TD>
@@ -68,7 +72,7 @@ DIV.conflist {
 <TD class="sn"></TD>
 <TD class="mail"><A href=""></A></TD>
 <TD class="telephoneNumber"></TD>
-<TD class="lastUserAccessTS" style="display: none"></TD>
+<TD class="lastUserAccessTS" hidden></TD>
 <TD class="actions">
 <A href="" class="record"><SPAN class="ui-icon ui-icon-link"></A>
 <A href="" class="userrecord"><SPAN class="ui-icon ui-icon-person"></A>
@@ -89,7 +93,7 @@ DIV.conflist {
 <TH><?i18n('THGIVENNAME')?></TH>
 <TH><?i18n('THMAIL')?></TH>
 <TH><?i18n('THTELEPHONENUMBER')?></TH>
-<TH class="lastUserAccessTS" style="display: none"><?i18n('THLASTUSERACCESSTS')?></TH>
+<TH class="lastUserAccessTS" hidden><?i18n('THLASTUSERACCESSTS')?></TH>
 <TH><?i18n('THACTIONS')?></TH>
 </TR>
 </THEAD>
@@ -135,6 +139,13 @@ function init() {
 		postAndFill();
 		});
 	$('#create').click(create);
+	$('#allowInactivate').click(function() {
+		console.log('tagada');
+		if($(this).is(':checked')) 
+			$('#inactivateAll').attr('disabled',false);
+		else $('#inactivateAll').attr('disabled',true);
+		});
+	$('#inactivateAll').click(inactivateAll);
 	$('#mailinglist').click(mailinglistOutput);
 	$('#csvoutput').click(csvOutput);
 	$('#solmaj').click(solmaj);
@@ -304,6 +315,21 @@ $.post(WSBASE+'/createUser.php',pdata,
 	if(res.yes)
 		{
 		window.location='./record.php?id='+res.answer;
+		}
+	else {
+		JT.deferr(res);
+		JT.mainDisable();
+		};
+	});
+}
+// INACTIVATE ALL ==============================
+function inactivateAll() {
+var pdata={};
+$.post(WSBASE+'/inactivateAll.php',pdata,
+	function(res) {
+	if(res.yes)
+		{
+		JT.defok(res);
 		}
 	else {
 		JT.deferr(res);

@@ -70,7 +70,8 @@ $SAP->header(translate('TITLEFICHE'));
 
 <DIV class="actionbar">
 <BUTTON id="record" title="<?i18n('RECORDBUTTONTIP');?>"><?i18n('RECORD');?><SPAN class="ui-icon ui-icon-check">S</SPAN></Button>
-<BUTTON id="listusers" class="admin" style="display: none" title="<?i18n('LISTUSERBUTTONTIP');?>"><?i18n('LISTUSER');?><SPAN class="ui-icon ui-icon-folder-open">L</SPAN></Button>
+<BUTTON id="getcard" title="<?i18n('GETCARDBUTTONTIP');?>"><?i18n('GETCARD');?><SPAN class="ui-icon ui-icon-print">P</SPAN></Button>
+<BUTTON id="listusers" class="admin" hidden title="<?i18n('LISTUSERBUTTONTIP');?>"><?i18n('LISTUSER');?><SPAN class="ui-icon ui-icon-folder-open">L</SPAN></Button>
 </DIV>
 
 
@@ -122,6 +123,8 @@ $SAP->header(translate('TITLEFICHE'));
 <BR>
 </FIELDSET>
 
+<A id="download" download="member-card.jpg" hidden><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
+
 <SCRIPT>
 var idmember=0;
 
@@ -143,7 +146,8 @@ function fillform(res) {
 	$('#lastCallTS').val(res.lastCallTS);
 	$('#lastUserModTS').val(res.lastUserModTS);
 	$('#resReason').val(res.resReason);
-	
+
+	if(res.isActive=='1') $('#getcard').show();
 	
 	//radiobuttons
 	if(res.hasResigned=='1') {
@@ -176,6 +180,23 @@ function fillform(res) {
 				if(res.yes)
 				{JT.defok(res);
 				console.log(res.answer);
+				}
+			else {
+				JT.deferr(res);
+				// JT.mainDisable();
+				};
+			});
+		});
+
+	$('#getcard').click(function() {
+		var pdata={};
+		$.post(WSBASE+'/getCard.php?id='+idmember,pdata,
+			function(res) {
+				if(res.yes)
+				{
+				$('#download').attr('href','data:image/jpeg;base64,'+res.answer);
+				var b=document.getElementById('download');
+				b.click();
 				}
 			else {
 				JT.deferr(res);

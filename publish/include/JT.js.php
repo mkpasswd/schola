@@ -39,7 +39,27 @@ JT.mainDisable=function() {
 // AFFICHAGE DES ERREURS
 JT.deferr=function(res) {
 switch(res.message) {
+	case 'INCORRECTPARM': Mess.error("<?asi18n('ERRINCORRECTPARM');?>",res.message);
+		break;
+	case 'CANTUPDATE': Mess.error("<?asi18n('ERRCANTUPDATE');?>",res.message);
+		break;
+	case 'MISSINGID': Mess.error("<?asi18n('ERRMISSINGID');?>",res.message);
+		break;
+	case 'CANTCREATE': Mess.error("<?asi18n('ERRCANTCREATE');?>",res.message);
+		break;
+	case 'REQERROR': Mess.error("<?asi18n('ERRREQERROR');?>",res.message);
+		break;
+	case 'NEEDADMINPRIV': Mess.error("<?asi18n('ERRNEEDADMINPRIV');?>",res.message);
+		break;
 	case 'NODATA': Mess.error("<?asi18n('ERRNODATA');?>",res.message);
+		break;
+	case 'INVALIDACCESSKEY': Mess.error("<?asi18n('ERRINVALIDACCESSKEY');?>",res.message);
+		break;
+	case 'NOVALID': Mess.error("<?asi18n('ERRNOVALID');?>",res.message);
+		break;
+	case 'NORECORD': Mess.error("<?asi18n('ERRNORECORD');?>",res.message);
+		break;
+	case 'TECHPB': Mess.error("<?asi18n('ERRTECHPB');?>",res.message);
 		break;
 	// default : Mess.error("<?asi18n('ERRDEFAULT');?>",res.message);
 	default : Mess.error("<?asi18n('ERRDEFAULT');?>",res.message+'<BR>'+res.answer);

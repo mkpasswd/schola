@@ -11,5 +11,17 @@
 "dbhost": "localhost",
 "dbname": "schola",
 "dbuser": "schola",
-"dbpass": "tooeasytoguess"
+"dbpass": "tooeasytoguess",
+"cardjpeg": "/WS/member-card/card-example.jpg",
+"cardfont": "/WS/member-card/Rodchenko-W01-Bold.ttf",
+"cardfontsize": "40",
+"cardfontangle": "3",
+"cardfontcolor": "FEF8FC",
+"cardfontalpha": "50",
+"cardstartx": "180",
+"cardstarty": "450",
+"cardindenty": "25",
+"cardextrainfo": "Carte Schola 2019-2020",
+"cardextrainfo2": "Accès Site : scdn2016"
+
 }
