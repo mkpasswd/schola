@@ -11,7 +11,7 @@ if(!$load['isActive']) {$a=new WSa(false,3,'NOTVALID');$a->send();exit;};
 if(!$SAP->isAdmin()) $SAP->db->updateTS($id,'lastUserAccessTS');
 $cury=$SAP->getConf()->cury;
 $a=new WSa(true,0,'OK',$load);
-$img=imagecreatefromjpeg(APSchola::ROOT.$SAP->getConf()->cardjpeg);
+$img=@imagecreatefromjpeg(APSchola::ROOT.$SAP->getConf()->cardjpeg);
 if(!$img) {$a=new WSa(false,4,'TECHPB','Missing JPEG background'.$SAP->getConf()->cardjpeg);$a->send();exit;};
 $font=APSchola::ROOT.$SAP->getConf()->cardfont;
 // echo $font;
@@ -27,7 +27,7 @@ $indenty=$SAP->getConf()->cardindenty;
 
 function writetext($text) {
 	global $colorindex,$img,$SAP,$starty,$indenty,$font;	
-	$ret=imagettftext($img,$SAP->getConf()->cardfontsize,$SAP->getConf()->cardfontangle,
+	$ret=@imagettftext($img,$SAP->getConf()->cardfontsize,$SAP->getConf()->cardfontangle,
 		$SAP->getConf()->cardstartx,$starty,$colorindex,$font,
 		$text);
 	// var_dump($ret); echo "<BR>";
