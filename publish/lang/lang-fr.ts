@@ -7,7 +7,11 @@
 	</message>
 	<message>
 		<source>WHEREPRINTCARDOK</source>
-		<translation>Année courant et actif (impression carte possible)</translation>
+		<translation>Année courante et actif (impression carte possible)</translation>
+	</message>
+	<message>
+		<source>WHERESENDCARDMAIL</source>
+		<translation>Carte dispo et dernier sollicitation il y a plus de 20 jours</translation>
 	</message>
 	<message>
 		<source>ALLOWINACTIVATELABEL</source>

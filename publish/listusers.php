@@ -22,6 +22,7 @@ DIV.conflist {
 <INPUT TYPE="radio" name="where" id="w5" value="hasResigned=false and mail<>'' and year=<?=$SAP->getConf()->cury?>"><LABEL for="w5"><?i18n('WHEREYEARNOTRESIGNEDMAIL')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w6" value="lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w6"><?i18n('WHEREFARACCESS')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w9" value="year=<?=$SAP->getConf()->cury?> and isActive=true"><LABEL for="w9"><?i18n('WHEREPRINTCARDOK')?></LABEL><BR>
+<INPUT TYPE="radio" name="where" id="w10" value=""year=<?=$SAP->getConf()->cury?> and isActive=true and lastCallTS > DATE_SUB(NOW(), INTERVAL 20 DAY)"><LABEL for="w10"><?i18n('WHERESENDCARDMAIL')?></LABEL><BR>
 <INPUT TYPE="radio" name="where" id="w7" value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w7"><?i18n('WHERECLOSEACCESS')?></LABEL><BR>
 </DIV>
 <!-- === -->
