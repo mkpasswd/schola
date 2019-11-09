@@ -13,8 +13,9 @@
 "dbuser": "schola",
 "dbpass": "tooeasytoguess",
 "cardjpeg": "/WS/member-card/card-example.jpg",
+"cardunavailable": "/WS/member-card/card-unavailable.jpg",
 "cardfont": "/WS/member-card/Rodchenko-W01-Bold.ttf",
-"cardfontsize": "40",
+"cardfontsize": "60",
 "cardfontangle": "3",
 "cardfontcolor": "FEF8FC",
 "cardfontalpha": "50",
@@ -22,6 +23,6 @@
 "cardstarty": "450",
 "cardindenty": "25",
 "cardextrainfo": "Carte Schola 2019-2020",
-"cardextrainfo2": "Accès Site : scdn2016"
+"cardextrainfo2": "Accès Site : your-password"
 
 }

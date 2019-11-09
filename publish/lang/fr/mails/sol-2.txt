@@ -1,5 +1,5 @@
 Subject: [SCHOLA] RAPPEL - Mise a jour de vos donnees personnelles - RAPPEL
-From: "Schola-Fichier Choristes" <schola-db@le-bagage.net>
+From: "Schola-Fichier Choristes" <schola-db@your-domain.net>
 Bonjour {{GIVENNAME}},
 <P>Sauf erreur de notre part, vous n'avez pas encore vérifié
 vos coordonnées dans notre fichier

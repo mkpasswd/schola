@@ -1,9 +1,16 @@
 Subject: [SCHOLA] Votre carte d'adhérent
-From: "Schola-Fichier Choristes" <schola-db@le-bagage.net>
+From: "Schola-Fichier Choristes" <schola-db@your-domain.net>
 Bonjour {{GIVENNAME}},
-<P>En retournant sur votre fiche adhérent vous trouverez maintenant un bouton "Imprimer la carte".<BR>
-En le pressant vous pourrez imprimer votre carte d'adhérent pour ensuite la découper et la plier selon les indications.
+
+<P>Votre carte d'adhérent est maintenant disponible en cliquant le lien ci-dessous<BR>
+<A href="{{PRINTCARD}}">Votre carte de membre Schola</A>
 </P>
-<P>Votre fiche est disponible à l'adresse suivante :<BR>
+
+<P>En le pressant vous pourrez imprimer votre carte d'adhérent pour ensuite la découper et la plier selon les indications.
+</P>
+
+<P>En retournant sur votre fiche adhérent vous trouverez également un bouton "Imprimer la carte".<BR>
+Votre fiche est disponible à l'adresse suivante :<BR>
 <A HREF="{{FICHEPERSO}}">{{FICHEPERSO}}</A>
 </P>
+

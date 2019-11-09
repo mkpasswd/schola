@@ -18,7 +18,7 @@ $recipients=array();
 $mail=new TMail();
 $mcontent=$SAP->getTrad()->i18nfile("mails/$msg.txt");
 $urlformat=SITE."/record.php?id=%s&check=%s";
-$printcardformat=SITE."/printcard.php?id=%s&check=%s";
+$printcardformat=SITE."/WS/getCard.php?id=%s&check=%s&jpeg=X";
 foreach($ids as $id) {
 	$id=intval($id);
 	if(!$SAP->db->updateTS($id,'lastCallTS')) {$totdbproblem++; continue;};

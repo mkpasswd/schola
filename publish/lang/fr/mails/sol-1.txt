@@ -1,5 +1,5 @@
 Subject: [SCHOLA] Mise a jour de vos donnees personnelles
-From: "Schola-Fichier Choristes" <schola-db@le-bagage.net>
+From: "Schola-Fichier Choristes" <schola-db@your-domain.net>
 Bonjour {{GIVENNAME}},
 <P>Nous avons besoin de votre participation
 pour mettre à jour vos coordonnées
