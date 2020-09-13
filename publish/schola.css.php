@@ -15,6 +15,10 @@ TABLE.ULIST .numli {
 	text-align: right;
 	}
 
+TABLE.ULIST TD.year {
+	text-align: center;
+	}
+
 TABLE.ULIST TD.category {
 	text-align: center;
 	}

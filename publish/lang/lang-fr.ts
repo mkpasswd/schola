@@ -416,8 +416,28 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 		<translation>Dernier accès il y a moins d'un mois</translation>
 	</message>
 	<message>
-		<source>WHERECURRENTYEAR</source>
-		<translation>Uniquement les inscriptions de l'année courante non démissionaire</translation>
+		<source>LIBCURRENTYEAR</source>
+		<translation>Année courante</translation>
+	</message>
+	<message>
+		<source>LIBALLYEAR</source>
+		<translation>Toutes les années</translation>
+	</message>
+	<message>
+		<source>LIBLASTYEAR</source>
+		<translation>Année précedente</translation>
+	</message>
+	<message>
+		<source>LIBRESIGNEDINDIF</source>
+		<translation>Indifférent</translation>
+	</message>
+	<message>
+		<source>LIBNOTRESIGNED</source>
+		<translation>Non-démissionaires</translation>
+	</message>
+	<message>
+		<source>LIBRESIGNED</source>
+		<translation>Démissionaires</translation>
 	</message>
 	<message>
 		<source>WHERECURRENTYEARANDSHOWADDRESS</source>
@@ -436,20 +456,24 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 		<translation>Sans mail</translation>
 	</message>
 	<message>
-		<source>WHERENOTRESIGNED</source>
-		<translation>Non démissionaires</translation>
-	</message>
-	<message>
-		<source>WHERERESIGNED</source>
-		<translation>Démissionaires</translation>
-	</message>
-	<message>
 		<source>WHERESELECTION</source>
-		<translation>Limiter les résultats</translation>
+		<translation>Limiter les résultats&amp;nbsp;:</translation>
 	</message>
 	<message>
-		<source>WHEREYEARNOTRESIGNEDMAIL</source>
-		<translation>Avec un mail, pas démissionaire et dans l'année courante</translation>
+		<source>SORTYEAR</source>
+		<translation>Trier par année</translation>
+	</message>
+	<message>
+		<source>SHOWYEAR</source>
+		<translation>fficher l'année</translation>
+	</message>
+	<message>
+		<source>LIBWITHMAIL</source>
+		<translation>Avec un adresse mail renseignée</translation>
+	</message>
+	<message>
+		<source>LIBSHOWADDRESS</source>
+		<translation>Désire diffuser son adresse</translation>
 	</message>
 </context></TS>
 

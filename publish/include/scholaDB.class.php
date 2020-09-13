@@ -8,6 +8,8 @@ static $DEBUG=false;
 static $ADMINFIELDS=array(
 	'id',
 	'akey',
+	'sn',
+	'givenName',
 	'isActive',
 	'isAdmin',
 	'isCAMember',

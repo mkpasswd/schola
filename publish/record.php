@@ -8,11 +8,11 @@ $SAP->header(translate('TITLEFICHE'));
 <!-- <INPUT type="hidden" id="id" class="TX"> -->
 <LEGEND><?i18n('LEGENDPEDIGREE')?></LEGEND>
 <LABEL for="sn"><?i18n('LABELNOM')?></LABEL>
-<INPUT type="text" id="sn" class="TX STD">
+<INPUT type="text" id="sn" class="TX STD adminonly" readonly>
 <BR>
 
 <LABEL for="givenName"><?i18n('LABELPRENOM')?></LABEL>
-<INPUT type="text" id="givenName" class="TX STD">
+<INPUT type="text" id="givenName" class="TX STD adminonly" readonly>
 </FIELDSET>
 
 <!-- ================================= -->
@@ -76,7 +76,7 @@ $SAP->header(translate('TITLEFICHE'));
 
 
 <!-- ================================= -->
-<FIELDSET id="ADMFS" class="admin" style="display: none">
+<FIELDSET id="ADMFS" class="admin" hidden>
 <LEGEND><?i18n('LEGENDADMIN')?></LEGEND>
 
 <LABEL for="year"><?i18n('LABELANNEE')?></LABEL>
@@ -103,7 +103,7 @@ $SAP->header(translate('TITLEFICHE'));
 <A id="useraccess" HREF=""><SPAN class="ui-icon ui-icon-link">l</SPAN></A>
 </FIELDSET>
 
-<FIELDSET id="DATEFS" class="admin" style="display: none">
+<FIELDSET id="DATEFS" class="admin" hidden>
 <LEGEND><?i18n('LEGENDDATES')?></LEGEND>
 
 <LABEL for="lastUserAccessTS"><?i18n('LABELLASTUSERACCESSTS')?></LABEL>
@@ -168,7 +168,10 @@ function fillform(res) {
 	$('#useraccess').attr('HREF',url);
 	$('#yearLabel').html(res.yearLabel);
 	
-	if(res.currentUserIsAdmin=='1') $('.admin').slideDown();
+	if(res.currentUserIsAdmin=='1') {
+		$('.admin').slideDown();
+		$('.adminonly').attr('readonly',false);
+		};
 
 	$('#listusers').click(function() {document.location='./listusers.php';});
 

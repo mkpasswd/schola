@@ -12,51 +12,59 @@ DIV.conflist {
 	}
 </STYLE>
 <!-- === -->
-<DIV id="where" class="conflist">
-<H3><?i18n('WHERESELECTION')?></H3>
-<INPUT class='WHEREDEFAULT' TYPE="radio" name="where" id="w4" value="year=<?=$SAP->getConf()->cury?> and hasResigned=false"><LABEL for="w4"><?i18n('WHERECURRENTYEAR')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w8" value="year=<?=$SAP->getConf()->cury?> and hasResigned=false and showAddress=true"><LABEL for="w8"><?i18n('WHERECURRENTYEARANDSHOWADDRESS')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w1" value="" checked><LABEL for="w1"><?i18n('WHEREDEFAULT')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w2" value="hasResigned=false"><LABEL for="w2"><?i18n('WHERENOTRESIGNED')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w3" value="hasResigned=true"><LABEL for="w3"><?i18n('WHERERESIGNED')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w5" value="hasResigned=false and mail<>'' and year=<?=$SAP->getConf()->cury?>"><LABEL for="w5"><?i18n('WHEREYEARNOTRESIGNEDMAIL')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w6" value="lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w6"><?i18n('WHEREFARACCESS')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w9" value="year=<?=$SAP->getConf()->cury?> and isActive=true"><LABEL for="w9"><?i18n('WHEREPRINTCARDOK')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w10" value=""year=<?=$SAP->getConf()->cury?> and isActive=true and lastCallTS > DATE_SUB(NOW(), INTERVAL 20 DAY)"><LABEL for="w10"><?i18n('WHERESENDCARDMAIL')?></LABEL><BR>
-<INPUT TYPE="radio" name="where" id="w7" value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><LABEL for="w7"><?i18n('WHERECLOSEACCESS')?></LABEL><BR>
+<FIELDSET>
+<LEGEND><?i18n('LISTUSERPARMSLEGEND')?></LEGEND>
+<LABEL><?i18n('WHERESELECTION')?></LABEL>
+<DIV>
+<SELECT id="year">
+<OPTION class="YEARDEFAULT" value="year=<?=$SAP->getConf()->cury?>"><?i18n('LIBCURRENTYEAR')?></OPTION>
+<OPTION value="year=<?=$SAP->getConf()->precyy?>"><?i18n('LIBCLASTYEAR')?></OPTION>
+<OPTION value="true"><?i18n('LIBALLYEAR')?></OPTION>
+</SELECT>
+<BR>
+<SELECT id="hasResigned">
+<OPTION class="RESIGNEDDEFAULT" value="hasResigned=false"><?i18n('LIBNOTRESIGNED')?></OPTION>
+<OPTION value="hasResigned=true"><?i18n('LIBRESIGNED')?></OPTION>
+<OPTION value="true"><?i18n('LIBRESIGNEDINDIF')?></OPTION>
+</SELECT>
+<BR>
+<SELECT id="where">
+<OPTION class="WHEREDEFAULT" value="true" checked><?i18n('WHEREDEFAULT')?> <!--tous-->
+<OPTION value="showAddress=true"><?i18n('LIBSHOWADDRESS')?></OPTION><BR>
+<OPTION value="mail<>''"><?i18n('LIBWITHMAIL')?></OPTION>
+<OPTION value="( lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH) )"><?i18n('WHEREFARACCESS')?></OPTION>
+<OPTION value="isActive=true"><?i18n('WHEREPRINTCARDOK')?></OPTION>
+<OPTION value="isActive=true and lastCallTS > DATE_SUB(NOW(), INTERVAL 20 DAY)"><?i18n('WHERESENDCARDMAIL')?></OPTION>
+<OPTION value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><?i18n('WHERECLOSEACCESS')?></OPTION>
+</SELECT>
+<BR>
+
 </DIV>
-<!-- === -->
-<DIV id="sort" class="conflist">
-<H3><?i18n('SORTSELECTION')?></H3>
-<INPUT class='SORTDEFAULT' TYPE="radio" name="sort" id="s2" value="concat(category,'-',sn,'-',givenName)"><LABEL for="s2"><?i18n('SORTCATEGORY')?></LABEL><BR>
-<INPUT TYPE="radio" name="sort" id="s1" value="concat(sn,'-',givenName)" checked><LABEL for="s1"><?i18n('SORTDEFAULT')?></LABEL><BR>
-<INPUT TYPE="radio" name="sort" id="s3" value="lastUserAccessTS"><LABEL for="s3"><?i18n('SORTLASTACESS')?></LABEL><BR>
+
+<BR>
+<LABEL><?i18n('SORTSELECTION')?></LABEL>
+<DIV>
+<SELECT id="sort">
+<OPTION  class='SORTDEFAULT' TYPE="radio" name="sort" id="s2" value="concat(category,'-',sn,'-',givenName)"><?i18n('SORTCATEGORY')?></OPTION>
+<OPTION id="s1" value="concat(sn,'-',givenName)" checked><?i18n('SORTDEFAULT')?></OPTION>
+<OPTION id="s3" value="lastUserAccessTS"><?i18n('SORTLASTACESS')?></OPTION>
+<OPTION id="s4" value="concat(year,'-','sn','-',givenName)"><?i18n('SORTYEAR')?></OPTION>
+</SELECT>
+<BR>
 <INPUT TYPE="checkbox" id="reverseOrder"><LABEL for="reverseOrder"><?i18n('SORTREVERSEORDER')?></LABEL>
 </DIV>
-<!-- === -->
-<DIV id="show" class="conflist">
-<H3><?i18n('SHOWSELECTION')?></H3>
+<BR>
+
+<LABEL><?i18n('SHOWSELECTION')?></LABEL>
+<DIV>
 <INPUT TYPE="checkbox" id="showLastAccess"><LABEL for="showLastAccess"><?i18n('SHOWLASTACESS')?></LABEL><BR>
+<INPUT TYPE="checkbox" id="showYear"><LABEL for="showYear"><?i18n('SHOWYEAR')?></LABEL><BR>
 </DIV>
+</FIELDSET>
 
 <!-- ACTION BUTTONS ================================ -->
 <DIV class="actionbar">
 <BUTTON id="list" title="<?i18n('LISTBUTTONTIP');?>"><?i18n('LISTBUTTON');?><SPAN class="ui-icon ui-icon-gear">S</SPAN></Button>
-<BR>
-<BUTTON id="solmaj" title="<?i18n('SOLMAJBUTTONTIP');?>" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
-<INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></LABEL>
-<INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></LABEL>
-<INPUT id="msg3" type="radio" NAME="msg" value="print-card" class="msgselect"><Label for="msg3"><?i18n('PRINTCARDMSGLABEL');?></LABEL>
-<BR>
-<BUTTON id="create" title="<?i18n('CREATEBUTTONTIP');?>"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
-<BUTTON id="inactivateAll" title="<?i18n('INACTIVATEBUTTONTIP');?>" disabled><?i18n('INACTIVATEBUTTON');?><SPAN class="ui-icon ui-icon-eject">I</SPAN></Button>
-<INPUT id="allowInactivate" type="checkbox" value="X" ><Label for="allowInactivate"><?i18n('ALLOWINACTIVATELABEL');?></LABEL>
-<BR>
-<BUTTON id="csvoutput" title="<?i18n('CSVBUTTONTIP');?>"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
-<INPUT id="flatify" type="checkbox" value="X" ><Label for="flatify"><?i18n('FLATIFYLABEL');?></LABEL>
-<BUTTON id="mailinglist" title="<?i18n('MAILINGLISTBUTTONTIP');?>"><?i18n('MAILINLISTBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">D</SPAN></Button>
-
-<A id="download" download="schola.csv" hidden><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
 </DIV>
 
 <!-- <TEXTAREA id="csvtext" cols="128" rows="10"></TEXTAREA>-->
@@ -68,6 +76,7 @@ DIV.conflist {
 <TR>
 <TD class="numli"></TD>
 <TD><INPUT type="checkbox" CLASS="recsel"></TD>
+<TD class="year" hidden></TD>
 <TD class="category"></TD>
 <TD class="givenName"></TD>
 <TD class="sn"></TD>
@@ -89,6 +98,7 @@ DIV.conflist {
 <TR>
 <TH class="numli"><SPAN id="selcount">0</SPAN>/<SPAN id="count">0</SPAN></TH>
 <TH><INPUT type="checkbox" id="selectAll"></TD>
+<TH class="year" hidden><?i18n('THYEAR')?></TH>
 <TH><?i18n('THCATEGORY')?></TH>
 <TH><?i18n('THSN')?></TH>
 <TH><?i18n('THGIVENNAME')?></TH>
@@ -104,6 +114,23 @@ DIV.conflist {
 </TFOOT>
 </TABLE>
 
+<DIV class="actionbar">
+<BUTTON id="solmaj" title="<?i18n('SOLMAJBUTTONTIP');?>" disabled><?i18n('SOLMAJBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">S</SPAN></Button>
+<INPUT id="msg1" type="radio" NAME="msg" value="sol-1" class="msgselect"><Label for="msg1"><?i18n('SOLMAJMSG1LABEL');?></LABEL>
+<INPUT id="msg2" type="radio" NAME="msg" value="sol-2" class="msgselect"><Label for="msg2"><?i18n('SOLMAJMSG2LABEL');?></LABEL>
+<INPUT id="msg3" type="radio" NAME="msg" value="print-card" class="msgselect"><Label for="msg3"><?i18n('PRINTCARDMSGLABEL');?></LABEL>
+<BR>
+<BUTTON id="create" title="<?i18n('CREATEBUTTONTIP');?>"><?i18n('CREATEBUTTON');?><SPAN class="ui-icon ui-icon-circle-plus">C</SPAN></Button>
+<BUTTON id="inactivateAll" title="<?i18n('INACTIVATEBUTTONTIP');?>" disabled><?i18n('INACTIVATEBUTTON');?><SPAN class="ui-icon ui-icon-eject">I</SPAN></Button>
+<INPUT id="allowInactivate" type="checkbox" value="X" ><Label for="allowInactivate"><?i18n('ALLOWINACTIVATELABEL');?></LABEL>
+<BR>
+<BUTTON id="csvoutput" title="<?i18n('CSVBUTTONTIP');?>"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
+<INPUT id="flatify" type="checkbox" value="X" ><Label for="flatify"><?i18n('FLATIFYLABEL');?></LABEL>
+<BUTTON id="mailinglist" title="<?i18n('MAILINGLISTBUTTONTIP');?>"><?i18n('MAILINLISTBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">D</SPAN></Button>
+
+<A id="download" download="schola.csv" hidden><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
+</DIV>
+
 <SCRIPT>
 //CSV CONFIGURATION ==============================
 var SEP=';';
@@ -116,8 +143,8 @@ var numsel=0;
 
 // MAIN ==========================================
 $(function(){
-	$('.WHEREDEFAULT').first().attr('checked',true);
-	$('.SORTDEFAULT').first().attr('checked',true);
+	$('.WHEREDEFAULT').first().attr('selected',true);
+	$('.SORTDEFAULT').first().attr('selected',true);
 	postAndFill();
 	init();
 	});
@@ -170,6 +197,7 @@ function addLine(res) {
 	$(wl).addClass('userline');
 	$(wl).find('.recsel').attr('title',res.id).attr('DATA-ID',res.id);
 	$(wl).children('.numli').html(numli);
+	$(wl).children('.year').html(res.year);
 	$(wl).children('.category').html(res.category);
 	$(wl).children('.sn').html(res.sn);
 	$(wl).children('.givenName').html(res.givenName);
@@ -197,9 +225,9 @@ function buildSearchParms() {
 	var pdata={};
 	pdata.check=JT.getURLParameter('check');
 	pdata.adm=JT.getURLParameter('adm');
-	pdata.sort=$('input[name=sort]:checked').val();
+	pdata.sort=$('#sort').val();
 	if(pdata.sort && $('#reverseOrder').is(':checked')) pdata.sort+=' DESC'; 
-	pdata.where=$('input[name=where]:checked').val();
+	pdata.where=$('#where').val()+' AND '+$('#hasResigned').val()+' AND '+$('#year').val();
 	return pdata;
 	}
 
@@ -296,10 +324,10 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	if(res.yes)
 		{
 		for( i=0;i<res.answer.length;i++) addLine(res.answer[i]);
-		if($('#showLastAccess').is(':checked')) {
-			// console.log('=================');
-			$('TABLE.ULIST .lastUserAccessTS').show();
-			};
+		if($('#showLastAccess').is(':checked')) {$('TABLE.ULIST .lastUserAccessTS').show();}
+		else {$('TABLE.ULIST .lastUserAccessTS').hide();};
+		if($('#showYear').is(':checked')) {$('TABLE.ULIST .year').show();}
+		else {$('TABLE.ULIST .year').hide();};
 		}
 	else {
 		JT.deferr(res);

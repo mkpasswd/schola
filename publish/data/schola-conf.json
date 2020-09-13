@@ -5,9 +5,11 @@
 "years": {
 	"2018": "2018-2019",
 	"2019": "2019-2020",
+	"2020": "2020-2021",
 	"NA" : "~na~"	
 	},
-"cury": "2019",
+"precy": "2019",
+"cury": "2020",
 "dbhost": "localhost",
 "dbname": "schola",
 "dbuser": "schola",
@@ -22,7 +24,7 @@
 "cardstartx": "180",
 "cardstarty": "450",
 "cardindenty": "25",
-"cardextrainfo": "Carte Schola 2019-2020",
+"cardextrainfo": "Carte Schola 2020-2021",
 "cardextrainfo2": "Accès Site : your-password"
 
 }
