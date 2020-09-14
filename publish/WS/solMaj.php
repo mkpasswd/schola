@@ -32,7 +32,7 @@ foreach($ids as $id) {
 		'{{FICHEPERSO}}'=>$url,
 		'{{PRINTCARD}}'=>$printcard,
 		));
-	$dest=($testaddress)? $testaddress:$fiche['mail'];
+	$dest=($testaddress)? $testaddress:implode(', ',preg_split('/[\s,]+/',trim($fiche['mail'])));
 	$recipients[]=$fiche['mail'];
 	$mail->mail($dest);
 	//$mail->mail('maurice@localhost');
@@ -41,6 +41,7 @@ foreach($ids as $id) {
 $a=new WSa(true,0,'OK',array("totdbproblem"=>$totdbproblem,
 	'totnoaddress'=>$totnoaddress,
 	'totmailsent'=>$totmailsent,
+	'realdest'=>$dest,
 	'recipients'=>$recipients));
 $a->send();
 exit();
