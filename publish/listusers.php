@@ -4,38 +4,33 @@ include('global.inc.php');
 $SAP->header(translate('TITLEUSERLIST'));
 ?>
 <!-- REQUEST PARAMETERS ============================ -->
-<STYLE>
-DIV.conflist {
-	width: 32%;
-	vertical-align: top;
-	display: inline-block;
-	}
-</STYLE>
 <!-- === -->
 <FIELDSET>
 <LEGEND><?i18n('LISTUSERPARMSLEGEND')?></LEGEND>
 <LABEL><?i18n('WHERESELECTION')?></LABEL>
 <DIV>
+<SELECT id="where">
+<OPTION class="SELDEFAULT" value="true" checked><?i18n('WHEREDEFAULT')?> <!--tous-->
+<OPTION value="( lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH) )"><?i18n('WHEREFARACCESS')?></OPTION>
+<OPTION value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><?i18n('WHERECLOSEACCESS')?></OPTION>
+<OPTION value="mail<>''"><?i18n('LIBWITHMAIL')?></OPTION>
+<OPTION value="showAddress=true"><?i18n('LIBSHOWADDRESS')?></OPTION><BR>
+<OPTION value="isActive=true"><?i18n('WHEREPRINTCARDOK')?></OPTION>
+<OPTION value="isActive=true and lastCallTS > DATE_SUB(NOW(), INTERVAL 20 DAY)"><?i18n('WHERESENDCARDMAIL')?></OPTION>
+</SELECT>
+<BR>
+
 <SELECT id="year">
-<OPTION class="YEARDEFAULT" value="year=<?=$SAP->getConf()->cury?>"><?i18n('LIBCURRENTYEAR')?></OPTION>
+<OPTION class="SELDEFAULT" value="year=<?=$SAP->getConf()->cury?>"><?i18n('LIBCURRENTYEAR')?></OPTION>
 <OPTION value="year=<?=$SAP->getConf()->precyy?>"><?i18n('LIBCLASTYEAR')?></OPTION>
 <OPTION value="true"><?i18n('LIBALLYEAR')?></OPTION>
 </SELECT>
 <BR>
+
 <SELECT id="hasResigned">
-<OPTION class="RESIGNEDDEFAULT" value="hasResigned=false"><?i18n('LIBNOTRESIGNED')?></OPTION>
+<OPTION class="SELDEFAULT" value="hasResigned=false"><?i18n('LIBNOTRESIGNED')?></OPTION>
 <OPTION value="hasResigned=true"><?i18n('LIBRESIGNED')?></OPTION>
 <OPTION value="true"><?i18n('LIBRESIGNEDINDIF')?></OPTION>
-</SELECT>
-<BR>
-<SELECT id="where">
-<OPTION class="WHEREDEFAULT" value="true" checked><?i18n('WHEREDEFAULT')?> <!--tous-->
-<OPTION value="showAddress=true"><?i18n('LIBSHOWADDRESS')?></OPTION><BR>
-<OPTION value="mail<>''"><?i18n('LIBWITHMAIL')?></OPTION>
-<OPTION value="( lastUserAccessTS is null OR lastUserAccessTS <= DATE_SUB(NOW(), INTERVAL 1 MONTH) )"><?i18n('WHEREFARACCESS')?></OPTION>
-<OPTION value="isActive=true"><?i18n('WHEREPRINTCARDOK')?></OPTION>
-<OPTION value="isActive=true and lastCallTS > DATE_SUB(NOW(), INTERVAL 20 DAY)"><?i18n('WHERESENDCARDMAIL')?></OPTION>
-<OPTION value="lastUserAccessTS > DATE_SUB(NOW(), INTERVAL 1 MONTH)"><?i18n('WHERECLOSEACCESS')?></OPTION>
 </SELECT>
 <BR>
 
@@ -143,8 +138,7 @@ var numsel=0;
 
 // MAIN ==========================================
 $(function(){
-	$('.WHEREDEFAULT').first().attr('selected',true);
-	$('.SORTDEFAULT').first().attr('selected',true);
+	$('.SELDEFAULT').attr('selected',true);
 	postAndFill();
 	init();
 	});

@@ -7,11 +7,11 @@
 	</message>
 	<message>
 		<source>WHEREPRINTCARDOK</source>
-		<translation>Année courante et actif (impression carte possible)</translation>
+		<translation>Carte dispo (actif)</translation>
 	</message>
 	<message>
 		<source>WHERESENDCARDMAIL</source>
-		<translation>Carte dispo et dernier sollicitation il y a plus de 20 jours</translation>
+		<translation>Carte dispo (actif) et dernière sollicitation il y a plus de 20 jours</translation>
 	</message>
 	<message>
 		<source>ALLOWINACTIVATELABEL</source>
@@ -167,11 +167,11 @@
 	</message>
 	<message>
 		<source>LABELINSCRNO</source>
-		<translation>Non, je ne souhaite plus faire partie de la Schola</translation>
+		<translation>Non, je ne souhaite pas faire partie de la Schola cette année</translation>
 	</message>
 	<message>
 		<source>LABELINSCRYES</source>
-		<translation>Oui, je m'inscris à nouveau cette année</translation>
+		<translation>Oui, je m'inscris cette année</translation>
 	</message>
 	<message>
 		<source>LABELLASTCALLTS</source>
@@ -321,15 +321,18 @@
 Nous supprimerons vos coordonnées d'ici quelques semaines
 mais vous inscrirons à la newsletter.
 &lt;BR&gt;
-Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</translation>
+Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.
+&lt;BR&gt;
+N'hésitez pas à envoyer un mail à schola-nantes-contact@googlegroups.com ou passez à une répé si l'envie vous prend de revenir !
+</translation>
 	</message>
 	<message>
 		<source>SHOWLASTACESS</source>
-		<translation>Afficher la date de dernier accès</translation>
+		<translation>Date du dernier accès</translation>
 	</message>
 	<message>
 		<source>SHOWSELECTION</source>
-		<translation>Sélection de colonnes à afficher</translation>
+		<translation>Colonnes optionnelles&amp;nbsp;:</translation>
 	</message>
 	<message>
 		<source>SOLMAJBUTTON</source>
@@ -337,7 +340,7 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	</message>
 	<message>
 		<source>SOLMAJBUTTONTIP</source>
-		<translation>Sollicte une mise à jour de la fiche avec un message prédéfini</translation>
+		<translation>Sollicite une mise à jour de la fiche avec un message prédéfini</translation>
 	</message>
 	<message>
 		<source>SOLMAJMSG1LABEL</source>
@@ -349,23 +352,23 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	</message>
 	<message>
 		<source>SORTCATEGORY</source>
-		<translation>Trier selon le pupitre</translation>
+		<translation>Par pupitre</translation>
 	</message>
 	<message>
 		<source>SORTDEFAULT</source>
-		<translation>Nom et prénom</translation>
+		<translation>Par nom et prénom</translation>
 	</message>
 	<message>
 		<source>SORTLASTACESS</source>
-		<translation>selon la date de dernier accès par le membre</translation>
+		<translation>Selon la date de dernier accès par le membre</translation>
 	</message>
 	<message>
 		<source>SORTREVERSEORDER</source>
-		<translation>afficher dans le sens inverse</translation>
+		<translation>Afficher dans le sens inverse</translation>
 	</message>
 	<message>
 		<source>SORTSELECTION</source>
-		<translation>Tri à effectuer</translation>
+		<translation>Tri à effectuer&amp;nbsp;:</translation>
 	</message>
 	<message>
 		<source>THACTIONS</source>
@@ -461,15 +464,19 @@ Vous pourrez bien sûr facilement vous en désinscrire si vous le souhaitez.</tr
 	</message>
 	<message>
 		<source>SORTYEAR</source>
-		<translation>Trier par année</translation>
+		<translation>Par année</translation>
 	</message>
 	<message>
 		<source>SHOWYEAR</source>
-		<translation>fficher l'année</translation>
+		<translation>Afficher l'année</translation>
 	</message>
 	<message>
 		<source>LIBWITHMAIL</source>
 		<translation>Avec un adresse mail renseignée</translation>
+	</message>
+	<message>
+		<source>LISTUSERPARMSLEGEND</source>
+		<translation>Paramètres de sélection et d'affichage</translation>
 	</message>
 	<message>
 		<source>LIBSHOWADDRESS</source>
