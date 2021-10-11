@@ -399,6 +399,10 @@ N'hésitez pas à envoyer un mail à schola-nantes-contact@googlegroups.com ou p
 		<translation>Téléphone</translation>
 	</message>
 	<message>
+		<source>TITLEMAIN</source>
+		<translation>Gestion du fichier adhérents</translation>
+	</message>
+	<message>
 		<source>TITLEDEBUG</source>
 		<translation>GAS, page de debug</translation>
 	</message>
@@ -465,6 +469,10 @@ N'hésitez pas à envoyer un mail à schola-nantes-contact@googlegroups.com ou p
 	<message>
 		<source>SORTYEAR</source>
 		<translation>Par année</translation>
+	</message>
+	<message>
+		<source>SHOWLASTACCESS</source>
+		<translation>Afficher la date de dernier accès</translation>
 	</message>
 	<message>
 		<source>SHOWYEAR</source>
