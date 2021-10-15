@@ -20,6 +20,9 @@ $SAP->header(translate('TITLEFICHE'));
 <LEGEND><?i18n('LEGENDINSCRIPTION')?> <SPAN id="yearLabel">20xx-20yy</SPAN></LEGEND>
 <LABEL><?i18n('LABELDESINSCRIPTION')?></LABEL>
 <DIV>
+<DIV id="divinscrundefined" hidden>
+<INPUT name="hasResigned" type="radio" id="inscrunknown" class="TX" value='9'><LABEL for="inscrunknown"><?i18n('LABELINSCRUNKNOWN')?></LABEL>
+</DIV>
 <INPUT name="hasResigned" type="radio" id="inscryes" class="TX" value='0'><LABEL for="inscryes"><?i18n('LABELINSCRYES')?></LABEL>
 <BR>
 <INPUT name="hasResigned" type="radio" id="inscrno" class="TX" value='1'><LABEL for="inscrno"><?i18n('LABELINSCRNO')?></LABEL>
@@ -150,10 +153,22 @@ function fillform(res) {
 	if(res.isActive=='1') $('#getcard').show();
 	
 	//radiobuttons
-	if(res.hasResigned=='1') {
+	resignStatus=parseInt(res.hasResigned);
+	switch(resignStatus) {
+	case 9 : 
+		$('#divinscrundefined').slideDown();
+		$('#inscrunknown').attr('checked',true);
+		break;
+	case 1 :
 		$('#inscrno').attr('checked',true);
-		$('#resexplik').slideDown();}
-	else $('#inscryes').attr('checked',true);
+		$('#resexplik').slideDown();
+		break;
+	case 0 :
+		$('#inscryes').attr('checked',true);
+		break;
+	default:
+	};
+
 	$('#'+res.category).attr('checked',true);
 
 	//checkboxes

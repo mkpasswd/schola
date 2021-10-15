@@ -20,17 +20,21 @@ $SAP->header(translate('TITLEUSERLIST'));
 </SELECT>
 <BR>
 
+<?=$SAP->multipleyearselect(array($SAP->getConf()->cury));?>
+<!--
 <SELECT id="year">
 <OPTION class="SELDEFAULT" value="year=<?=$SAP->getConf()->cury?>"><?i18n('LIBCURRENTYEAR')?></OPTION>
-<OPTION value="year=<?=$SAP->getConf()->precyy?>"><?i18n('LIBCLASTYEAR')?></OPTION>
+<OPTION value="year=<?=$SAP->getConf()->precy?>"><?i18n('LIBLASTYEAR')?></OPTION>
 <OPTION value="true"><?i18n('LIBALLYEAR')?></OPTION>
 </SELECT>
+-->
 <BR>
 
 <SELECT id="hasResigned">
-<OPTION class="SELDEFAULT" value="hasResigned=false"><?i18n('LIBNOTRESIGNED')?></OPTION>
-<OPTION value="hasResigned=true"><?i18n('LIBRESIGNED')?></OPTION>
-<OPTION value="true"><?i18n('LIBRESIGNEDINDIF')?></OPTION>
+<OPTION value="hasResigned=9"><?i18n('LIBUNKNOWN')?></OPTION>
+<OPTION value="hasResigned=0"><?i18n('LIBNOTRESIGNED')?></OPTION>
+<OPTION value="hasResigned=1"><?i18n('LIBRESIGNED')?></OPTION>
+<OPTION class="SELDEFAULT" value="true"><?i18n('LIBRESIGNEDINDIF')?></OPTION>
 </SELECT>
 <BR>
 
@@ -221,7 +225,13 @@ function buildSearchParms() {
 	pdata.adm=JT.getURLParameter('adm');
 	pdata.sort=$('#sort').val();
 	if(pdata.sort && $('#reverseOrder').is(':checked')) pdata.sort+=' DESC'; 
-	pdata.where=$('#where').val()+' AND '+$('#hasResigned').val()+' AND '+$('#year').val();
+	pdata.where=$('#where').val()+' AND '+$('#hasResigned').val();
+	var ys=[];
+	for(var y of $('#year').val())
+		ys.push("'"+y+"'");
+	console.log(ys);
+	if(ys.length > 0) pdata.where+=" AND year in ( "+ys.join(',')+" )";
+	console.log(pdata.where);
 	return pdata;
 	}
 
@@ -370,15 +380,20 @@ function solmaj() {
 	pdata.ids=ids;
 	// pdata.testaddress='one@toreceiveall';
 	pdata.msg=$('input[NAME=msg]:checked').val();
-	
+		console.log('STEP 1');
+			
 	$.post(WSBASE+'/solMaj.php',pdata,
 		function(res) {
+		console.log('STEP 2');
+		
 		if(res.yes)
 			{
+			console.log('BONNARD');
 			JT.defok(res);
 			$('.recsel:checked').attr('checked',false).attr('disabled',true);
 			}
 		else {
+			console.log('foirage');
 			JT.deferr(res);
 			};
 		});

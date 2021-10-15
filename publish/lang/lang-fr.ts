@@ -166,6 +166,10 @@
 		<translation>Votre inscription à la Schola&amp;nbsp;:</translation>
 	</message>
 	<message>
+		<source>LABELINSCRUNKNOWN</source>
+		<translation>je n'ai pas encore répondu</translation>
+	</message>
+	<message>
 		<source>LABELINSCRNO</source>
 		<translation>Non, je ne souhaite pas faire partie de la Schola cette année</translation>
 	</message>
@@ -437,6 +441,10 @@ N'hésitez pas à envoyer un mail à schola-nantes-contact@googlegroups.com ou p
 	<message>
 		<source>LIBRESIGNEDINDIF</source>
 		<translation>Indifférent</translation>
+	</message>
+	<message>
+		<source>LIBUNKNOWN</source>
+		<translation>Statut indéterminé</translation>
 	</message>
 	<message>
 		<source>LIBNOTRESIGNED</source>

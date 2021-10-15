@@ -100,15 +100,25 @@ function simpleSelect($name,$opt,$default=null,$extra='') {
 	$ret="<SELECT name=\"$name\" id=\"$name\" $extra>\n";
 	$ret.="<OPTION value=\"\">-</OPTION>\n";
 	foreach($opt as $k=>$v) {
-		$yes=($k==$default)? 'SELECTED':'';
+		$yes=($k===$default)? 'SELECTED':'';
 		$ret.="<OPTION value=\"$k\" $yes>$v</OPTION>\n";
 		};
 	$ret.="</SELECT>\n";
 	return $ret;
 	}
 
-function yearselect() {
-	return $this->simpleSelect('year',$this->conf->years,null,'class="TX"');
+function yearselect($default=null) {
+	return $this->simpleSelect('year',$this->conf->years,$default,'class="TX"');
+	}
+
+function multipleyearselect($default=array()) {
+	$ret="<SELECT name=\"year\" id=\"year\" multiple class=\"TX\">\n";
+	foreach($this->conf->years as $k=>$v) {
+		$yes=(in_array($k,$default))? 'SELECTED':'';
+		$ret.="<OPTION value=\"$k\" $yes>$v</OPTION>\n";
+		};
+	$ret.="</SELECT>\n";
+	return $ret;
 	}
 
 function optgroupSelect($name,$opt,$default=null, $extra='') {
