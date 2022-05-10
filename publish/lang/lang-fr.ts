@@ -375,6 +375,10 @@ N'hésitez pas à envoyer un mail à schola-nantes-contact@googlegroups.com ou p
 		<translation>Tri à effectuer&amp;nbsp;:</translation>
 	</message>
 	<message>
+		<source>THSHOWADDRESS</source>
+		<translation>Diff. OK</translation>
+	</message>
+	<message>
 		<source>THACTIONS</source>
 		<translation>Actions</translation>
 	</message>
@@ -481,6 +485,10 @@ N'hésitez pas à envoyer un mail à schola-nantes-contact@googlegroups.com ou p
 	<message>
 		<source>SHOWLASTACCESS</source>
 		<translation>Afficher la date de dernier accès</translation>
+	</message>
+	<message>
+		<source>SHOWSHOWADDRESS</source>
+		<translation>Afficher le choix concernant la diffusion des informations de contact</translation>
 	</message>
 	<message>
 		<source>SHOWYEAR</source>

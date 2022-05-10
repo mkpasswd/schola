@@ -58,6 +58,7 @@ $SAP->header(translate('TITLEUSERLIST'));
 <DIV>
 <INPUT TYPE="checkbox" id="showLastAccess"><LABEL for="showLastAccess"><?i18n('SHOWLASTACESS')?></LABEL><BR>
 <INPUT TYPE="checkbox" id="showYear"><LABEL for="showYear"><?i18n('SHOWYEAR')?></LABEL><BR>
+<INPUT TYPE="checkbox" id="showShowAddress"><LABEL for="showShowAddress"><?i18n('SHOWSHOWADDRESS')?></LABEL><BR>
 </DIV>
 </FIELDSET>
 
@@ -81,6 +82,7 @@ $SAP->header(translate('TITLEUSERLIST'));
 <TD class="sn"></TD>
 <TD class="mail"><A href=""></A></TD>
 <TD class="telephoneNumber"></TD>
+<TD class="showAddress" hidden></TD>
 <TD class="lastUserAccessTS" hidden></TD>
 <TD class="actions">
 <A href="" class="record"><SPAN class="ui-icon ui-icon-link"></A>
@@ -103,6 +105,7 @@ $SAP->header(translate('TITLEUSERLIST'));
 <TH><?i18n('THGIVENNAME')?></TH>
 <TH><?i18n('THMAIL')?></TH>
 <TH><?i18n('THTELEPHONENUMBER')?></TH>
+<TH class="showAddress" hidden><?i18n('THSHOWADDRESS')?></TH>
 <TH class="lastUserAccessTS" hidden><?i18n('THLASTUSERACCESSTS')?></TH>
 <TH><?i18n('THACTIONS')?></TH>
 </TR>
@@ -196,6 +199,7 @@ function addLine(res) {
 	$(wl).find('.recsel').attr('title',res.id).attr('DATA-ID',res.id);
 	$(wl).children('.numli').html(numli);
 	$(wl).children('.year').html(res.year);
+	$(wl).children('.showAddress').html(res.showAddress);
 	$(wl).children('.category').html(res.category);
 	$(wl).children('.sn').html(res.sn);
 	$(wl).children('.givenName').html(res.givenName);
@@ -332,6 +336,8 @@ $.post(WSBASE+'/listUsers.php',pdata,
 		else {$('TABLE.ULIST .lastUserAccessTS').hide();};
 		if($('#showYear').is(':checked')) {$('TABLE.ULIST .year').show();}
 		else {$('TABLE.ULIST .year').hide();};
+		if($('#showShowAddress').is(':checked')) {$('TABLE.ULIST .showAddress').show();}
+		else {$('TABLE.ULIST .showAddress').hide();};
 		}
 	else {
 		JT.deferr(res);

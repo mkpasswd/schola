@@ -1,5 +1,6 @@
 <?
 // define('__PURELOCAL','yo');
+// YO !
 define('__BAGAGE','yo');
 define('APPNAME','SCHOLA');
 
