@@ -128,6 +128,7 @@ $SAP->header(translate('TITLEUSERLIST'));
 <BR>
 <BUTTON id="csvoutput" title="<?i18n('CSVBUTTONTIP');?>"><?i18n('CSVBUTTON');?><SPAN class="ui-icon ui-icon-disk">D</SPAN></Button>
 <INPUT id="flatify" type="checkbox" value="X" ><Label for="flatify"><?i18n('FLATIFYLABEL');?></LABEL>
+<INPUT TYPE="checkbox" id="rgpd"><LABEL for="rgpd"><?i18n('RESPECTRGPD')?></LABEL>
 <BUTTON id="mailinglist" title="<?i18n('MAILINGLISTBUTTONTIP');?>"><?i18n('MAILINLISTBUTTON');?><SPAN class="ui-icon ui-icon-mail-closed">D</SPAN></Button>
 
 <A id="download" download="schola.csv" hidden><SPAN class="ui-icon ui-icon-link">L</SPAN></A>
@@ -290,6 +291,7 @@ $.post(WSBASE+'/listUsers.php',pdata,
 	var csvheader='';
 	var cvsfile='';
 	var flatify=$('#flatify').is(':checked');
+	var rgpd=$('#rgpd').is(':checked');
 	console.log('flatify : '+flatify);
 	for( i=0;i<res.answer.length;i++) {
 		var line=res.answer[i];
@@ -306,6 +308,9 @@ $.post(WSBASE+'/listUsers.php',pdata,
 					csvheader+=QUOTE+csvquotes(key)+QUOTE;
 					};
 				if(csvline) csvline+=SEP;
+				// console.log(key);
+				if(rgpd && line['showAddress']==0 && (key=='mail' || key=='postalAddress' || key=='telephoneNumber')) line[key]='-o-';
+				// console.log(line);
 				if(flatify) csvline+=QUOTE+csvquotes(line[key]).replace(/(\r\n|\r|\n)/g,' ')+QUOTE
 				else csvline+=QUOTE+csvquotes(line[key])+QUOTE;
 				}		
