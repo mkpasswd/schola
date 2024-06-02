@@ -31,7 +31,7 @@ do {
 	//(isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 	} while(false);
 
-ini_set('include_path', ROOT.'/include');
+ini_set('include_path', ROOT.'/include'.PATH_SEPARATOR.ROOT.'/include/LMKbits');
 ini_set('error_log',ROOT.'/logs/error.log');
 
 ?>

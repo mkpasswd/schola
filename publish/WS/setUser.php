@@ -2,6 +2,8 @@
 include('../mini.inc.php');
 include('global.inc.php');
 include('WSa.class.php');
+use LMKbits\WSa;
+use LMKbits\T;
 
 function unsetgp($v) {
 	if(isset($_GET[$v])) unset($_GET[$v]);

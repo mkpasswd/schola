@@ -1,7 +1,7 @@
 <?
 include('global.inc.php');
-include('WSa.class.php');
-include('WST.class.php');
+use LMKbits\T;
+
 // $w=new WSTools(); tout passé en static
 
 //ecrasage de $_POST dans le cas où un parm jp est passé et qu'il contient du json

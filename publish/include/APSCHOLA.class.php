@@ -1,6 +1,8 @@
 <?
 //Singleton d'application
 // dépendances : T.class, Translation.class, fastConf.class
+use LMKbits\{T,Translation,fastConf};
+
 class APSCHOLA {
 // clefs de valeurs de session
 const ROOT=ROOT;

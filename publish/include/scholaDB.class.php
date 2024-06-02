@@ -1,7 +1,10 @@
 <?
-include('stdErr.interface.php');
+include('ErrDeal.trait.php');
 
-class scholaDB implements stdErr{
+class scholaDB{
+
+use LMKbits\ErrDeal;
+
 var $dblink=false;
 static $DEBUG=false;
 
@@ -50,37 +53,6 @@ static $JSONFIELDS=array(
 	);
 
 static $ALLFIELDS=false;
-
-// marche pas, interdit... include('stdErr.impl.php');
-// donc Copy-Paste, dommage...
-//===============
-private $errn=0;
-private $errstr='';
-
-public function getErr(&$num,&$str) {
-	$num=$this->errn;
-	$str=$this->errstr;
-	}
-
-public function getErrStr() { return $this->errstr;}
-public function getErrNum() { return $this->errn;}
-public function getErrCombo() { return '['.$this->errn.'] '.$this->errstr;}
-
-public function setErr($num,$str) {
-	$this->errn=$num;
-	$this->errstr=$str;
-	return ($num===0);
-	}
-
-public function deconne() {return ($this->errn!==0);}
-public function wtf() {return $this->deconne();}
-
-public function clearErr() {
-	$this->setErr(0,'');
-	}
-
-//===============
-
 
 function dealDBErr() {
 	$this->clearErr();
