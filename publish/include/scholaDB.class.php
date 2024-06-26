@@ -86,7 +86,7 @@ public function directSQL($req) {
 	}
 
 private function addJsonFields(&$row) {
-	$extra=json_decode($row['jsonVals'],true);
+	$extra=(isset($row['jsonVals']))? json_decode($row['jsonVals'],true):false;
 	/*	if($extra) $row=array_merge($row,$extra);
 	foreach(self::$JSONFIELDS as $f)
 		if (!isset($row[$f])) $row[$f]='';
